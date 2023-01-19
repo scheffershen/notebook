@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'My Notes',
-  tagline: '',
+  tagline: 'My notes for learning and working',
   url: 'https://scheffershen.github.io',
   baseUrl: '/notebook',
   onBrokenLinks: 'throw',
