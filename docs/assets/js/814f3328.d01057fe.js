@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Guide du d\xe9veloppeur","permalink":"/notebook/blog/guide-developpeur"},{"title":"Comment optimiser l\'application symfony","permalink":"/notebook/blog/comment-optimiser-l-application-symfony"}]}')}}]);
