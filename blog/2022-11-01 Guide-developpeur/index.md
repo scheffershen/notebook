@@ -5,14 +5,6 @@ authors: [yshen]
 tags: [solid, code quality, code analyser, unit testing, workflow, git]
 ---
 
-- [SOLID](#solid)
-- [Code Quality](#code-quality)
-- [Code Analyser](#code-analyser)
-- [Unit Testing](#unit-testing)
-- [Workflow](#workflow)
-- [Commands utiles](#commands-utiles)
-- [Branches](#branches)
-
 ### SOLID
 
 En programmation orientée objet, SOLID est un acronyme mnémonique qui regroupe cinq principes de conception destinés à produire des architectures logicielles plus compréhensibles, flexibles et maintenables. 
