@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[9797],{5112:e=>{e.exports=JSON.parse('{"label":"symfony","permalink":"/notebook/blog/tags/symfony","allTagsPath":"/notebook/blog/tags","count":1}')}}]);
