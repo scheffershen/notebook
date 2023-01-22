@@ -5,6 +5,19 @@ authors: [yshen]
 tags: [symfony, php, optimisation]
 ---
 
+- [1. Activer OpCache extension](#1-activer-opcache-extension)
+- [2. Asynchroniser les requêts simultanément](#2-asynchroniser-les-requêts-simultanément)
+- [3. Utiliser la fonction générateur pour consommer moins des mémoires](#3-utiliser-la-fonction-générateur-pour-consommer-moins-des-mémoires)
+- [3. Eviter d'utiliser "select \* " dans le doctrine requête.](#3-eviter-dutiliser-select---dans-le-doctrine-requête)
+- [4. Activer le cache de Doctrine.](#4-activer-le-cache-de-doctrine)
+- [5. Mise en cache les HTTP reqêtes](#5-mise-en-cache-les-http-reqêtes)
+- [6. Augementer le nombre des cores, la fréquence de cpu, et la RAM](#6-augementer-le-nombre-des-cores-la-fréquence-de-cpu-et-la-ram)
+- [7. Augementer la taille du swap](#7-augementer-la-taille-du-swap)
+- [8. Utiliser le crontab pour les tâches lourdes](#8-utiliser-le-crontab-pour-les-tâches-lourdes)
+
+
+
+
 ### 1. Activer OpCache extension
 
 OpCache. Il compile et optimise les scripts PHP et les met en cache mémoire afin qu'ils ne soient pas compilés chaque fois que la page est chargée.
@@ -177,7 +190,7 @@ S'il faut 3 secondes à un cœur de processeur à 2 GHz pour traiter une demande
 
 La règle est RAM=2x(Nombre de Cores) Go ou RAM=4x(Nombre de Cores) Go
 
-### 7. Augementer la taille du swap 
+### 7. Augementer la taille du swap
 
 Augmenter l'espace d'échange (SWAP), la règle d'or est swap=2xRAM.
 
