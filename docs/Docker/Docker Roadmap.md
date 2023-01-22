@@ -2,7 +2,7 @@ Docker Roadmap
 ==============
 
 - Dockerfile references
-- [Docker references](docker-cheat-sheet.pdf)
+- [Docker references](./)
 	+ Buld
 		* `docker build -t myimage:1.0 .`
 		* `docker image ls`
@@ -37,12 +37,12 @@ Docker Roadmap
 	+ run docker-compose command in crontab
 		+ `docker-compose exec -T`
 - Docker-sync
-	+ [Docker sync](Docker-sync/docker-sync.md)
-	+ [Docker sync installation](Docker-sync/docker-sync-installation.md)
-	+ [Docker sync examples](Docker-sync/docker-sync-examples.md)
+	+ [Docker sync](./)
+	+ [Docker sync installation](./)
+	+ [Docker sync examples](./)
 - Examples
 	+ `mes-docker-PHP56-72-74-examples.md`
 	+ `open-source-docker-examples.md`
 - FAQs
-	+ [From inside of a Docker container, how do I connect to the localhost of the machine](From-inside-of-a-Docker-container-how-do-I-connect-to-the-localhost-of-the-machine.md)
+	+ [From inside of a Docker container, how do I connect to the localhost of the machine](./)
 - References

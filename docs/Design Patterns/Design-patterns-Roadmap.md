@@ -7,20 +7,20 @@ Design-patterns-Roadmap
 	+ Builder
 	+ Factories
 		* Abstract Factory
-		* [Factory Method](./Design-patterns-PHP/FactoryPattern/Factory-Pattern.md)
+		* [Factory Method](./)
 			- Ex: SocialNetWork vs AdapterPattern SocialMedia
 			- Marque:
-	+ [Prototype](./Design-patterns-PHP/SingletonPattern/Prototype-Pattern.md)
-	+ [Singleton](./Design-patterns-PHP/SingletonPattern/Singleton-Pattern.md)
+	+ [Prototype](./)
+	+ [Singleton](./)
 		* User Preferences
 - Structural
-	+ [Adapter](./Design-patterns-PHP/AdapterPattern/Adapter-Pattern.md)
+	+ [Adapter](./)
 		* Ex: EBooks, SocialMedia
-	+ [Bridge](./Design-patterns-PHP/BridgePattern/Bridge-Pattern.md)
+	+ [Bridge](./)
 		* Ex: Display
 	+ Composite
-	+ [Decorator](./Design-patterns-PHP/DecoratorPattern/Decorator-Pattern.md)
-	+ [Façade](./Design-patterns-PHP/FacadePattern/Facade-Pattern.md)
+	+ [Decorator](./)
+	+ [Façade](./)
 	+ Flyweight
 	+ Proxy
 
@@ -31,10 +31,10 @@ Design-patterns-Roadmap
 	+ Iterator
 	+ Mediator
 	+ Memento
-	+ [Observer](./Design-patterns-PHP/ObserverPattern/Observer-Pattern.md)
+	+ [Observer](./)
 		* Ex: Symfony Events dispatch
 	+ State
-	+ [Strategy](./Design-patterns-PHP/StrategyPattern/Strategy-Pattern.md)
+	+ [Strategy](./)
 		* Ex: Comparator
 		* Marque: une strategie classe qui a une interface injecté dans le constructeur
 	+ Template Method
@@ -43,24 +43,24 @@ Design-patterns-Roadmap
 ## SOLID
 
 - Javascript
-    + [Single-Responsibility-Principle](./Javascript/solid_Single-Responsibility-Principle.js)
-    + [Open-Close-Principle](./Javascript/solid_Open-Close-Principle.js)
-    + [Liskov-Subsitutuion-Principle](./Javascript/solid_Liskov-Subsitutuion-Principle.js)
-    + [Interface-Segregation-Principle](./Javascript/solid_Interface-Segregation-Principle.js)
-	+ [Dependency-Inversion-Principle](./Javascript/solid_Dependency-Inversion-Principle.js)
+    + [Single-Responsibility-Principle](./)
+    + [Open-Close-Principle](./)
+    + [Liskov-Subsitutuion-Principle](./)
+    + [Interface-Segregation-Principle](./)
+	+ [Dependency-Inversion-Principle](./)
 - PHP
-	- [SOLID_Le guide simple avec de vrais exemples.md](./PHP/SOLID-Le-guide-simple-avec-de-vrais-exemples.md)
-    + [Single-Responsibility-Principle](./PHP/solid_Single-Responsibility-Principle.php)
-    + [Open-Close-Principle](./PHP/solid_Open-Close-Principle.php)
-    + [Liskov-Subsitutuion-Principle](./PHP/solid_Liskov-Subsitutuion-Principle.php)
-    + [Interface-Segregation-Principle](./PHP/solid_Interface-Segregation-Principle.php)
-	+ [Dependency-Inversion-Principle](./PHP/solid_Dependency-Inversion-Principle.php)	
+	- [SOLID_Le guide simple avec de vrais exemples.md](./)
+    + [Single-Responsibility-Principle](./)
+    + [Open-Close-Principle](./)
+    + [Liskov-Subsitutuion-Principle](./)
+    + [Interface-Segregation-Principle](./)
+	+ [Dependency-Inversion-Principle](./)	
 - Python
-    + [Single-Responsibility-Principle](./Python/solid_Single-Responsibility-Principle.py)
-    + [Open-Close-Principle](./Python/solid_Open-Close-Principle.py)
-    + [Liskov-Subsitutuion-Principle](./Python/solid_Liskov-Subsitutuion-Principle.py)
-    + [Interface-Segregation-Principle](./Python/solid_Interface-Segregation-Principle.py)
-	+ [Dependency-Inversion-Principle](./Python/solid_Dependency-Inversion-Principle.py)
+    + [Single-Responsibility-Principle](./)
+    + [Open-Close-Principle](./)
+    + [Liskov-Subsitutuion-Principle](./)
+    + [Interface-Segregation-Principle](./)
+	+ [Dependency-Inversion-Principle](./)
 
 ## Resources
 
