@@ -70,11 +70,12 @@ const config = {
             label: 'Notes',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/scheffershen/notbook',
+          {href: 'https://scheffershen.github.io/online-cv', label: 'CV', position: 'left'},
+          /*{
+            href: 'https://github.com/scheffershen/notebook',
             label: 'GitHub',
             position: 'right',
-          },
+          },*/
         ],
       },
       footer: {

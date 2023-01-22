@@ -1,0 +1,8 @@
+{
+    "label": "Certbot",
+    "position": 5,
+    "link": {
+      "type": "generated-index",
+      "description": "Certbot is a free, open source software tool for automatically using Let's Encrypt certificates on manually-administrated websites to enable HTTPS."
+    }
+  }
