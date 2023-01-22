@@ -16,8 +16,6 @@ tags: [symfony, php, optimisation]
 - [8. Utiliser le crontab pour les tâches lourdes](#8-utiliser-le-crontab-pour-les-tâches-lourdes)
 
 
-
-
 ### 1. Activer OpCache extension
 
 OpCache. Il compile et optimise les scripts PHP et les met en cache mémoire afin qu'ils ne soient pas compilés chaque fois que la page est chargée.
