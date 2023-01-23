@@ -1,0 +1,8 @@
+{
+    "label": "Google Vision API",
+    "position": 1,
+    "link": {
+      "type": "generated-index",
+      "description": "Google Vision API is a cloud-based service that provides vision capabilities to developers. It includes powerful algorithms to process images and extract information from them. It can be used to extract information from images, such as faces, landmarks, logos, and more. It can also be used to detect explicit content in images."
+    }
+  }

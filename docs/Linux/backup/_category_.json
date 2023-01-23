@@ -1,0 +1,8 @@
+{
+    "label": "Backup with backup manager, scp and rsync",
+    "position": 7,
+    "link": {
+      "type": "generated-index",
+      "description": "Backup"
+    }
+  }

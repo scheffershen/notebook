@@ -1,8 +1,8 @@
 {
-    "label": "Bible",
+    "label": "commands",
     "position": 4,
     "link": {
       "type": "generated-index",
-      "description": "Bible",
+      "description": "commands"
     }
   }

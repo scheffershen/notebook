@@ -1,0 +1,8 @@
+{
+    "label": "Google API",
+    "position": 14,
+    "link": {
+      "type": "generated-index",
+      "description": "Google api is a set of application programming interfaces developed by Google which allow communication with Google Services and their integration to other services."
+    }
+  }
