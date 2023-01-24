@@ -1,0 +1,8 @@
+{
+    "label": "Jina AI",
+    "position": 5,
+    "link": {
+      "type": "generated-index",
+      "description": "Jina AI is an open-source neural search framework that allows you to build neural search applications in a matter of minutes. It is designed to be flexible, scalable, and easy to use.",
+    }
+  }

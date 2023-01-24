@@ -1,0 +1,9 @@
+version: "3.1"
+
+services:
+  php8:
+    image: php:8.0.21-zts-alpine3.15
+    container_name: php8
+    volumes:
+        - ./:/app
+    tty: true
