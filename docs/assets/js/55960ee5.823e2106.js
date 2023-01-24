@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[4121],{8070:e=>{e.exports=JSON.parse('[{"label":"Python","permalink":"/notebook/docs/tags/python","count":1},{"label":"AllenNLP","permalink":"/notebook/docs/tags/allen-nlp","count":1}]')}}]);
