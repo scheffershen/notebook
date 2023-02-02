@@ -1,17 +1,17 @@
 Redis with symfony2
-===
+===================
 
-##install
+### install
 
-    sudo apt-get -y install redis-server
+    $ sudo apt-get -y install redis-server
 
-##Redis-cli
+### Redis-cli
 
-php
-
+```php
     $redis = $this->container->get('snc_redis.default');    
     $specialites = $redis->get('keywords:specialite');
     $redis->set('keywords:specialite',serialize($array_specialites));
+```
 
     > redis-cli
         > monitor
@@ -23,7 +23,7 @@ If you run into problems with caching, the Redis cache can be purged by using th
     > redis-cli
         > flushall
 
-##What is redis ?
+### What is redis ?
 
 Remote DIctionary Server
 
@@ -31,33 +31,35 @@ Created in 2009
 
 Advanced in-memory key-value data-structure server
 
-##PHP clients
+### PHP clients
 
 Predis vs phpredis
 
-##symfony2
+### symfony2
 
 installing 
 
-    composer require snc/redis-bundle 1.1.*
+    $ composer require snc/redis-bundle 1.1.*
 
-    composer require predis/predis 1.0.*
+    $ composer require predis/predis 1.0.*
 
 OU 
 
-```app/autoload.php
-
+```php
+//app/autoload.php
     // allow autoload for predis 
     require __DIR__.'/../vendor/predis/predis/src/Autoloader.php';
 
     Predis\Autoloader::register();
 ```
 
-```/app/AppKernel.php
+```php
+//app/AppKernel.php
     new Snc\RedisBundle\SncRedisBundle(), 
 ```
 
-```app/config/config.yml
+```yaml
+//app/config/config.yml
 
     # Redis
     snc_redis:
@@ -89,7 +91,7 @@ You can now use Redis as a Symfony2 service!
 
 Controller
 
-```
+```php
     $redis = $this->get('snc_redis.default');
     $redis->set('foo', 'bar');
     $top20 = $redis->zrevrange('leaderboard', 0, 20, 'WITHSCORES');
