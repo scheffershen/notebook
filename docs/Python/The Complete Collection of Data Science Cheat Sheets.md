@@ -25,7 +25,7 @@ Majority of technical interviews and assessment tests include some type of SQL q
 
 Web Scraping is an essential part of data science, as it is used for gathering data, market research, and maintaining data pipelines.
 
-- [Web Scraping with Python](./scrapy/web-scraping-cheat-sheet-2021-python-for-web-scraping.pdf)
+- [Web Scraping with Python](./)
 - [Web scraping with R]
 - [Beautiful Soup](https://cheatography.com/justin1209/cheat-sheets/beautiful-soup/)
 - [Selenium](https://intellipaat.com/blog/tutorial/selenium-tutorial/selenium-cheat-sheet/)

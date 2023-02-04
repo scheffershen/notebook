@@ -43,15 +43,15 @@ https://phpunit.readthedocs.io/en/9.5/
 
 ## Sommaire
 
-- [Commands lines](./cli)
+- [Commands lines](./)
 - Fixtures
-- [Assertions](./assertions)
-- [Annotations](./annotations)
+- [Assertions](./)
+- [Annotations](./)
 	+ @before: pour spécifier des méthodes devant être appelées avant chaque méthode de test
-	+ [@dataProvider](./Data-Provider)
+	+ [@dataProvider](./)
 	+ @codeCoverageIgnore: pour exclure des lignes de code de l’analyse de couverture
-	+ [@depends](./Test-Dependencies)
+	+ [@depends](./)
 	+ @group:  les groupes en utilisant les options --group et --exclude-group du lanceur de test en ligne de commandes
-- [Mock et stub](./mock-et-stub)
+- [Mock et stub](./)
 
 
