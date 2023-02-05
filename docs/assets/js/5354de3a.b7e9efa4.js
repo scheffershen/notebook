@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[40726],{17083:e=>{e.exports=JSON.parse('{"label":"code analyser","permalink":"/notebook/blog/tags/code-analyser","allTagsPath":"/notebook/blog/tags","count":1}')}}]);

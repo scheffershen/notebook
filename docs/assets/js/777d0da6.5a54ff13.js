@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[81745],{74369:e=>{e.exports=JSON.parse('{"label":"MySQL","permalink":"/notebook/blog/tags/my-sql","allTagsPath":"/notebook/blog/tags","count":1}')}}]);
