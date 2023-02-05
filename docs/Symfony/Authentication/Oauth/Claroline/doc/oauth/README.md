@@ -16,12 +16,12 @@ In order to enable 3rd party connection (social login) using the OAuth service, 
 
 Click on the following links to learn how to configure your App for every provider and eventually retrieve your App key & secret
 
-- [Facebook](doc/facebookAppConfig.md)
-- [Twitter](doc/twitterAppConfig.md)
-- [Google](doc/googleAppConfig.md)
-- [LinkedIn](doc/linkedinAppConfig.md)
-- [Windows Live](doc/windowsAppConfig.md)
-- [Office 365](doc/office365AppConfig.md)
+- [Facebook](./)
+- [Twitter](./)
+- [Google](./)
+- [LinkedIn](./)
+- [Windows Live](./)
+- [Office 365](./)
 
 Once you've created your App and got your keys, it's time to enable login to your Claroline platform.
 

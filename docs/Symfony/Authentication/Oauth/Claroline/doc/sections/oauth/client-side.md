@@ -9,7 +9,7 @@ Third-party application that need access to the platform will first need to be r
 
 To do so a command line utility is available:
 
-```
+```shell
 php app/console claroline:client:create --redirect-uri="http://www.example.com/" --grant-type="authorization_code" --grant-type="password" --grant-type="refresh_token" --grant-type="token" --grant-type="client_credentials" client_name
 ```
 
@@ -200,8 +200,3 @@ response
     "refresh_token":"NEW_REFRESH_TOKEN"
 }
 ```
-
-
-[index documentation][1]
-
-[1]: ../index.md

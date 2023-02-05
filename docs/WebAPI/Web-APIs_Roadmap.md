@@ -22,20 +22,20 @@ Some APIs
 - Fetch API
 - Frame Timing API
 - Web Notifications
-- [Intersection Observer API](Intersection-Observer-API.md)
+- [Intersection Observer API](./)
 	+ `var observer = new IntersectionObserver()`
 	+ `observer.unobserve(item.target); observer.observe(img);`
-- [exploring-the-web-speech-api.md](exploring-the-web-speech-api.md)
-- [Page Visibility API](Page-Visibility-API.md)
+- [exploring-the-web-speech-api.md](./)
+- [Page Visibility API](./)
 	+ `document.visibilityState`
-- [Web Share API](Web-Share-API.md)
+- [Web Share API](./)
 	+ `navigator.share(shareData);`
-- [Broadcast Channel API](Broadcast-Channel-API.md)
+- [Broadcast Channel API](./)
 	+ `new BroadcastChannel("quote_channel");`
-- [Internationalization API](Internationalization-API.md)
+- [Internationalization API](./)
 	+ `new Intl.DateTimeFormat(); Intl.DisplayNames(); Intl.Locale(); Intl.NumberFormat(); Intl.RelativeTimeFormat()`
 	+ `navigator.language`
-- [Service Workers](Service-Workers.md)
+- [Service Workers](./)
 - [File System Access API]
 - [WebXR Device API]
 
@@ -47,4 +47,3 @@ Some APIs
 ## Resources
 
 - https://caniuse.com/?search=IntersectionObserver
-- 

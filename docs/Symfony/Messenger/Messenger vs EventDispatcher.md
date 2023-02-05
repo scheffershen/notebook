@@ -5,8 +5,8 @@ The purpose of the event dispatcher is to allow one piece of code to "notify" th
 
 ## Sommaire
 
-- [Messenger can be Async](Messenger-can-be-Async)
-- [EventDispatcher communicates back](EventDispatcher-communicates-back)
+- [Messenger can be Async](./)
+- [EventDispatcher communicates back](./)
 
 ## Messenger can be Async
 
