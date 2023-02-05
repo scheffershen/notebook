@@ -1,0 +1,14 @@
+# Ignore everything in the root except the "wp-content" directory.
+/*
+!.gitignore
+!wp-content/
+
+# Ignore everything in the "wp-content" directory, except the "mu-plugins", "plugins", and "themes" directories.
+wp-content/*
+!wp-content/mu-plugins/
+!wp-content/plugins/
+!wp-content/themes/
+
+# Ignore Strattic-specific files.
+wp-content/mu-plugins/strattic.php
+wp-content/mu-plugins/ludicrousdb

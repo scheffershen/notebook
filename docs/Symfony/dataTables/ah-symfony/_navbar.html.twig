@@ -1,0 +1,10 @@
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 border-bottom">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('index') }}">Alpha Hydro</a>
+    <span class="navbar-text text-nowrap px-3">{{ app.user.username }}</span>
+    <form class="w-100"><input id="datatable-search" class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search" name="nav_search" aria-controls="datatable"></form>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="{{ path('logout') }}">Sign out</a>
+        </li>
+    </ul>
+</nav>

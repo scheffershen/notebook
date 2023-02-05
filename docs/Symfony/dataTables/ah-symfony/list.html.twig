@@ -1,0 +1,29 @@
+{% extends 'admin.html.twig' %}
+
+{% set pageTitle = 'Категории'%}
+
+{% block body %}
+    {#{{ include('admin/categories/_categories_table.html.twig') }}#}
+    <table class="table table-striped" id="datatable">
+        <thead>
+        <tr>
+            <th scope="col">Id[id]</th>
+            <th scope="col">Сортировка в группе[sorting]</th>
+            <th scope="col">Наименование[name]</th>
+            <th scope="col">Родительская категория[parent]</th>
+            <th scope="col">Url на сайт[fullPath]</th>
+            <th scope="col">активность[active]</th>
+            <th scope="col">архив[deleted]</th>
+        </tr>
+        <tr>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+            <td><input type="text" class="w-100"/></td>
+        </tr>
+        </thead>
+    </table>
+{% endblock %}

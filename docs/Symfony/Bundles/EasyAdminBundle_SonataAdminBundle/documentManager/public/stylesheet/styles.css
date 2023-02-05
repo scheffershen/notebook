@@ -1,0 +1,70 @@
+body {
+    background: #76b852;
+    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+    background: -moz-linear-gradient(right, #76b852, #8DC26F);
+    background: -o-linear-gradient(right, #76b852, #8DC26F);
+    background: linear-gradient(to left, #76b852, #8DC26F);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin:50px 0;
+}
+
+.login-page {
+    width: 360px;
+    padding: 20px ;
+    margin: auto;
+    background: #FFFFFF;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.login-page .error {
+    background: #FF3333;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+form > div.cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+form > div > label {
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    border: 0;
+    padding:10px 50px;
+    background: #4CAF50;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-left: 23px;
+}
+
+button[type="submit"]:hover {
+    background: #43A047;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+}

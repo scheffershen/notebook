@@ -1,0 +1,43 @@
+{% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            displayChoicesHandle();
+
+            $('.question-disabled').each(function() {
+               $(this).find($("ul[id$='_question_type'] .radio label")).unbind('click');
+            });
+       });
+
+        $(document).on('sonata-collection-item-added', function() {
+            displayChoicesHandle();
+        });
+
+        var displayChoicesHandle = function() {
+            $("ul[id$='_question_type'] .radio label input:checked").each(function() {
+                displayChoices($(this));
+            });
+
+            $("ul[id$='_question_type'] .radio label").click(function() {
+                displayChoices($(this).find('input'));
+            });
+        };
+
+        var displayChoices = function(questionType) {
+            const questionBlock = $(questionType).parents(".sonata-ba-field div[id$='_question']").first();
+            const choicesBlock = questionBlock.find("div[id$='_question_choices']").first();
+
+            if ('{{ constant('App\\Jecoute\\SurveyQuestionTypeEnum::SIMPLE_FIELD') }}'
+                === $(questionType).val()
+            ) {
+                choicesBlock.hide();
+            } else {
+                choicesBlock.show();
+            }
+        };
+
+    </script>
+{% endblock %}

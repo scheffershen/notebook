@@ -1,0 +1,99 @@
+{% extends "base.twig" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Your Basket of Eggs</h3>
+
+            <div class="alert alert-info">
+                To start counting your eggs, you need to authorize Top Cluck
+                to use your COOP account! Once you do that, we can count
+                your eggs!
+            </div>
+
+            {% if user.coopUserId %}
+                <a class="btn btn-primary btn-lg" href="{{ path('count_eggs') }}">Count Eggs</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{{ path('coop_authorize_start') }}">Authorize</a>
+            {% endif %}
+
+            <div class="panel panel-default" style="margin-top: 10px;">
+                <div class="panel-body">
+                    {% if user.facebookUserId %}
+                        Share how many eggs you've collected today on Facebook!
+                        <a href="{{ path('facebook_share_place') }}" class="btn btn-info">Share</a>
+                    {% else %}
+                        Share your status on Facebook!
+                        <a href="{{ path('facebook_authorize_start') }}">Connect with Facebook</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-lg btn-info js-google-signin">Sign in with Google+</a>
+            <div id="google-plus-farmers"></div>
+
+        </div>
+        <div class="col-md-6">
+            {{ include('_leaderboard.twig', { 'egg_counts': egg_counts }) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-google-signin').on('click', function(e) {
+                // prevent the click from going to #
+                e.preventDefault();
+
+                gapi.auth.signIn();
+            });
+        });
+
+        var isSignedIn = false;
+        function mySignInCallback(authResult) {
+            if (authResult['status']['signed_in']) {
+                if (isSignedIn) {
+                    return;
+                }
+                isSignedIn = true;
+
+                // Update the app to reflect a signed in user
+                // Hide the sign-in button now that the user is authorized, for example:
+                $('.js-google-signin').hide();
+
+                // loads the gapi.client.plus JavaScript object
+                gapi.client.load('plus','v1', function() {
+                    loadCirclesPeople();
+                });
+            } else {
+                // Update the app to reflect a signed out user
+                // Possible error values:
+                //   "user_signed_out" - User is signed-out
+                //   "access_denied" - User denied access to your app
+                //   "immediate_failed" - Could not automatically log in the user
+                console.log('Sign-in state: ' + authResult['error']);
+            }
+        }
+
+        function loadCirclesPeople() {
+            var request = gapi.client.plus.people.list({
+                'userId': 'me',
+                'collection': 'visible'
+            });
+            request.execute(function (people) {
+                var $people = $('#google-plus-farmers');
+                $people.empty();
+                for (var personIndex in people.items) {
+                    var person = people.items[personIndex];
+                    $people.append('<img src="' + person.image.url + '">');
+                }
+            });
+        }
+    </script>
+    {# Put any JavaScript here #}
+{% endblock %}

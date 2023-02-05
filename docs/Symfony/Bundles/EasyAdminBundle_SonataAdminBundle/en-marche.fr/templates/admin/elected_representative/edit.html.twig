@@ -1,0 +1,172 @@
+{% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block sonata_tab_content %}
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Identité de l'élu
+                </h4>
+                <p class="no-margin">
+                    Ces informations proviennent du ministère de l'intérieur
+                </p>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.gender) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.firstName) }}
+                    <div class="inline-block">
+                        <div class="left row col-md-5">
+                            {{ form_row(form.birthDate) }}
+                        </div>
+                        <div class="rigth row col-md-7">
+                            {{ form_row (form.birthPlace) }}
+                        </div>
+                    </div>
+
+                    {% if form.userListDefinitions is defined %}
+                        {{ form_row(form.userListDefinitions) }}
+                        {{ form_row(form.hasFollowedTraining) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Contact
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.contactEmail) }}
+                    {{ form_row(form.contactPhone) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Identité adhérent
+                </h4>
+                <p class="no-margin">
+                    Ces informations sont celles du profil de l'adhérent
+                </p>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.adherent) }}
+                    {% if object.isAdherent %}
+                        {% set adherent = object.adherent %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        ID
+                                    </label>
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        <input type="text" class="form-control" disabled value="{{ adherent.id }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Téléphone
+                                    </label>
+                                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                                        <input type="text" class="form-control" disabled value="{{ adherent.phone ? adherent.phone|phone_number_format }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if is_granted('ROLE_APP_ADMIN_ADHERENT_EDIT') %}
+                            <a class="btn" href="{{ path('admin_app_adherent_edit', { id: adherent.id }) }}">
+                                <i class="fa fa-external-link"></i> Voir le profil
+                            </a>
+                        {% elseif is_granted('ROLE_APP_ADMIN_ADHERENT_VIEW') %}
+                            <a class="btn" href="{{ path('admin_app_adherent_show', { id: adherent.id }) }}">
+                                <i class="fa fa-external-link"></i> Voir le profil
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a class="btn btn-block btn-primary" href="{{ path('admin_app_electedrepresentative_adherent_similar_profiles', { id: object.id }) }}">
+                            <i class="fa fa-external-link"></i> Profils similaires
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Réseaux sociaux
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.socialNetworkLinks) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Étiquettes
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.labels) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Parrainages
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.sponsorships) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Mandats
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.mandates) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">
+                    Fonctions
+                </h4>
+            </div>
+            <div class="box-body">
+                <div class="sonata-ba-collapsed-fields">
+                    {{ form_row(form.politicalFunctions) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

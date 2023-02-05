@@ -1,0 +1,10 @@
+# services.yaml
+parameters:
+    locale: 'en'
+    app.notifications.email_sender: g.ponty@dev-web.io
+
+services:
+   # le nom de votre service
+   App\EventSubscriber\RegistrationNotifySubscriber:
+        # le nom de la variable que l'on utilisera dans le service
+        $sender: '%app.notifications.email_sender%'

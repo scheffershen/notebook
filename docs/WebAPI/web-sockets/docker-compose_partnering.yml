@@ -1,0 +1,74 @@
+version: '3.6'
+
+services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1080:8025"
+    networks:
+      - php       
+  php:
+    image: scheffer_shen/php71:latest
+    container_name: php
+    user: '1000:1000'
+    working_dir: /var/www/html
+    volumes:
+      - "./:/var/www/html"
+    networks:
+      - php 
+      - mysql   
+  caddy:
+    image: caddy:2
+    container_name: caddy
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-partnering.local, caddy:80}
+    ports:
+      - 80:80
+      - 443:443
+    working_dir: /var/www/html
+    volumes:
+      - "./web:/var/www/html/web"
+      - "./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro"
+      - "./docker/.data/caddy/data:/data"
+      - "./docker/.data/caddy/config:/config"
+    networks:
+      - php      
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 9TT4fgq5
+    command: '--sql_mode=""'  
+    volumes:
+      - "./docker/.data/db:/var/lib/mysql"
+      - "./sql:/home"
+    networks:
+      - mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always    
+    ports:
+      - "8080:80"      
+    environment:
+        PMA_HOST: mysql
+    networks:
+      - mysql   
+  redis:
+    image: redis:5-alpine
+    container_name: redis
+    restart: always
+    networks:
+      - php 
+  ws:
+    image: hprivakos/ws-broadcast
+    container_name: ws
+    ports:
+      - "8020:13370"   
+
+networks:
+    php:
+        driver: bridge
+    mysql:
+        driver: bridge      

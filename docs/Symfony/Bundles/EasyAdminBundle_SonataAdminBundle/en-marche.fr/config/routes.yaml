@@ -1,0 +1,251 @@
+#
+# Coalition
+#
+app_coalitions_login:
+    host: "%coalitions_auth_host%"
+    path: ""
+    controller: App\Controller\EnMarche\Security\SecurityController::loginAction
+    defaults:
+        app: coalitions
+
+app_coalitions_forgot_password:
+    host: "%coalitions_auth_host%"
+    path: "/mot-de-passe-oublie"
+    controller: App\Controller\EnMarche\Security\SecurityController::retrieveForgotPasswordAction
+    defaults:
+        app: coalitions
+
+#
+# JeMengage
+#
+app_jemengage_login:
+    host: "%jemengage_auth_host%"
+    path: ""
+    controller: App\Controller\EnMarche\Security\SecurityController::loginAction
+    defaults:
+        app: jemengage
+
+app_jemengage_forgot_password:
+    host: "%jemengage_auth_host%"
+    path: "/mot-de-passe-oublie"
+    controller: App\Controller\EnMarche\Security\SecurityController::retrieveForgotPasswordAction
+    defaults:
+        app: jemengage
+
+app_user_login_check:
+    host: "{app_domain}"
+    path: "/connexion/check"
+    methods: "POST"
+    controller: App\Controller\EnMarche\Security\SecurityController::loginCheckAction
+    defaults:
+        app_domain: '%app_host%'
+    requirements:
+        app_domain: "%app_host%|%coalitions_auth_host%|%jemengage_auth_host%"
+
+logout:
+    host: "{app_domain}"
+    path: "/deconnexion"
+    methods: "GET"
+    controller: App\Controller\EnMarche\Security\SecurityController::logoutAction
+    defaults:
+        app_domain: '%app_host%'
+    requirements:
+        app_domain: "%app_host%|%coalitions_auth_host%|%jemengage_auth_host%"
+
+app_adherent_reset_password:
+    host: "{app_domain}"
+    path: "/changer-mot-de-passe/{adherent_uuid}/{reset_password_token}"
+    methods: "GET|POST"
+    controller: App\Controller\EnMarche\Security\SecurityController::resetPasswordAction
+    defaults:
+        app_domain: '%app_host%'
+    requirements:
+        app_domain: "%app_host%|%coalitions_auth_host%|%jemengage_auth_host%"
+
+app_jemengage:
+    host: '%jemengage_auth_host%'
+    resource: "../src/Controller/JeMengage"
+    type: "annotation"
+
+#
+# Assets
+#
+app_assets:
+    resource: "../src/Controller/AssetsController.php"
+    type:     "annotation"
+
+#
+# Mooc
+#
+app_mooc:
+    resource: "../src/Controller/MoocController.php"
+    type:     "annotation"
+
+#
+# User uploaded documents
+#
+app_documents:
+    resource: "../src/Controller/UploadDocumentController.php"
+    type:     "annotation"
+
+#
+# API
+#
+app_api:
+    host:     "%app_host%"
+    resource: "../src/Controller/Api"
+    type:     "annotation"
+    prefix:   "%api_path_prefix%"
+    defaults:
+        _format: 'json'
+
+api_login_check:
+    path: "%api_path_prefix%/login_check"
+
+#
+# API Platform
+#
+api_platform:
+    resource: .
+    type: api_platform
+    prefix: "%api_path_prefix%"
+
+swagger_ui:
+    path: "%api_path_prefix%/swagger"
+    controller: api_platform.swagger.action.ui
+
+#
+# API Legislatives
+#
+app_legislatives_api:
+    host:     "{app_domaines}"
+    resource: "../src/Controller/Api/LegislativesController.php"
+    type:     "annotation"
+    prefix:   "%api_path_prefix%"
+    defaults:
+        _format: 'json'
+    requirements:
+        app_domaines: "%app_host%|%legislatives_host%"
+
+#
+# OAuth
+#
+app_oauth:
+    resource: "../src/Controller/OAuth"
+    type:     "annotation"
+    prefix:   "/oauth/v2"
+
+#
+# Admin 2FA
+#
+admin_security_2fa:
+    path: /admin/2fa
+    defaults:
+        _controller: "scheb_two_factor.form_controller:form"
+
+admin_security_2fa_check:
+    path: /admin/2fa_check
+
+#
+# Admin panel
+#
+admin_dashboard:
+    host:     "%app_host%"
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix:   "/admin"
+
+admin_crud:
+    host:     "%app_host%"
+    resource: .
+    type:     sonata_admin
+    prefix:   "/admin"
+
+app_admin:
+    host:     "%app_host%"
+    resource: "../src/Controller/Admin"
+    type:     "annotation"
+    prefix:   "/admin"
+
+#
+# En Marche app
+#
+lexik_paybox:
+    host:     "%app_host%"
+    resource: "@LexikPayboxBundle/Resources/config/routing.yml"
+    prefix:   "/don"
+
+# This route must be loaded first to prevent another route to match his path
+map_events:
+    host:    "%app_host%"
+    path:    /evenements/la-carte
+    methods: GET
+    defaults: { _controller: 'App\Controller\EnMarche\MapController:eventsAction' }
+
+app_enmarche:
+    host:     "%app_host%"
+    resource: "../src/Controller/EnMarche"
+    type:     "annotation"
+
+#
+# Legislatives app
+#
+app_legislatives:
+    host:     "%legislatives_host%"
+    resource: "../src/Controller/Legislatives"
+    type:     "annotation"
+
+#
+# Legacy
+#
+app_desintox:
+    host: "%app_host%"
+    path: /emmanuel-macron/desintox/{slug}
+    defaults:
+        slug: ~
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ''
+
+#
+# Redirections
+#
+app_redirect_login:
+    host: "%app_host%"
+    path: /login
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_user_login
+
+app_redirect_register:
+    host: "%app_host%"
+    path: /register
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_membership_join
+
+app_redirect_inscription:
+    host: "%app_host%"
+    path: /inscription
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: app_membership_join
+        permanent: true
+
+app_voting_platform:
+    resource: "../src/Controller/EnMarche/VotingPlatform"
+    type:     "annotation"
+    prefix:   "/elections/{uuid}"
+
+app_nous_reussirons:
+    host:     "%nous_reussirons_host%"
+    path:     /
+    methods:  GET
+    defaults: { _controller: App\Controller\EnMarche\PageController:showPageAction, slug: 'nous-reussirons' }
+
+# This route must be loaded the last to prevent an override
+app_static_page:
+    host:    "%app_host%"
+    path:    /{slug}
+    methods: GET
+    defaults: { _controller: 'App\Controller\EnMarche\PageController:showPageAction' }
+    requirements:
+        slug: .+

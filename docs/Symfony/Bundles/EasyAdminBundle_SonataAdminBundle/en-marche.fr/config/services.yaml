@@ -1,0 +1,343 @@
+parameters:
+    locale:                               fr
+    locales:                              [fr, en]
+    pattern_uuid:                         '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}'
+    pattern_sha1:                         '[0-9A-Fa-f]{40}'
+    pattern_coordinate:                   '-?\d+(\.\d{1,7})?'
+    timeline_max_messages:                30
+    search_max_results:                   30
+    enable_canary:                        "%env(ENABLE_CANARY)%"
+    procurations_reply_to_email:          'contact@en-marche.fr'
+    transactional_sender_email:           'contact@en-marche.fr'
+    transactional_sender_name:            'La République En Marche !'
+    campaign_sender_email:                'jemarche@en-marche.fr'
+    campaign_sender_name:                 'La République En Marche !'
+    feed_ttl:                             60 # in minutes
+    legislatives_financial_hotline_email: 'comptes.legislatives@en-marche.fr'
+    legislatives_standard_hotline_email:  'campagne.legislatives@en-marche.fr'
+    app_host:                             "%env(APP_HOST)%"
+    legislatives_host:                    "%env(LEGISLATIVES_HOST)%"
+    coalitions_host:                      "%env(COALITIONS_HOST)%"
+    coalitions_auth_host:                 "%env(COALITIONS_AUTH_HOST)%"
+    jemengage_host:                       "%env(JEMENGAGE_HOST)%"
+    jemengage_auth_host:                  "%env(JEMENGAGE_AUTH_HOST)%"
+    nous_reussirons_host:                 "%env(NOUS_REUSSIRONS_HOST)%"
+    mooc_base_url:                        "%env(MOOC_BASE_URL)%"
+    api_path_prefix:                      "%env(API_PATH_PREFIX)%"
+    router.request_context.scheme:        "%env(APP_SCHEME)%"
+    router.request_context.host:          "%app_host%"
+    image_max_length:                     450px
+    webhook.email_subscriptions_secret:   "%env(APP_EMAIL_SUBSCRIPTIONS_WEBHOOK_SECRET)%"
+    sonata.exporter.writer.csv.with_bom:  true
+    adherent_message_referent_limit:      1000
+    adherent_message_committee_limit:     1000
+    adherent_message_deputy_limit:        1000
+    adherent_message_senator_limit:       1000
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            $environment: '%kernel.environment%'
+            $canaryMode: '%env(ENABLE_CANARY)%'
+            $mailchimpClient: '@csa_guzzle.client.mailchimp_api'
+            $mailchimpListId: '%env(MAILCHIMP_MEMBER_LIST_ID)%'
+            $mailchimpElectedRepresentativeListId: '%env(MAILCHIMP_ELECTED_REPRESENTATIVE_LIST_ID)%'
+            $transactionalMailer: '@app.mailer.transactional'
+            $campaignMailer: '@app.mailer.campaign'
+            $votingProcessWorkflow: '@state_machine.voting_process'
+            $votingPlatformCache: !service
+                class: Symfony\Component\Cache\Simple\Psr6Cache
+                arguments: ['@app.cache.voting_platform']
+            $geoGouvApiClient: '@app.http_client.geo_gouv'
+            $tonMacronInvitationStateMachine: '@state_machine.ton_macron_invitation'
+            $patternUuid: '%pattern_uuid%'
+            $adherentInterests: '%adherent_interests%'
+            $mailchimpOrgId: '%env(MAILCHIMP_ORG_ID)%'
+            $mailchimpCampaignUrl: '%env(MAILCHIMP_CAMPAIGN_URL)%'
+            $mailchimpWebhookKey: '%env(MAILCHIMP_WEBHOOK_KEY)%'
+            $enableAssessorSpace: '%env(bool:ENABLE_ASSESSOR_SPACE)%'
+            $enableMunicipalSpace: '%env(bool:ENABLE_MUNICIPAL_SPACE)%'
+            $timelineMaxItems: '%timeline_max_messages%'
+            $coalitionsHost: '%coalitions_host%'
+            $coalitionsAuthHost: '%coalitions_auth_host%'
+            $jemengageHost: '%jemengage_host%'
+            $jemengageAuthHost: '%jemengage_auth_host%'
+            $internalApiProxyClient: '@app.http_client.internal_api_proxy'
+            $ovhSmsWebhookKey: '%env(OVHCLOUD_SMS_WEBHOOK_KEY)%'
+
+    _instanceof:
+        App\Adherent\Unregistration\Handlers\UnregistrationAdherentHandlerInterface:
+            tags: ['app.adherent.unregistration.handler']
+        App\Adherent\Certification\Handlers\CertificationRequestHandlerInterface:
+            tags: ['app.adherent.certification_request.handler']
+        App\AdherentMessage\MailchimpCampaign\Handler\MailchimpCampaignHandlerInterface:
+            tags: ['app.adherent_message.mailchimp.campaign.handler']
+        App\AdherentMessage\TransactionalMessage\MessageModifier\MessageModifierInterface:
+            tags: ['app.adherent_message.transaction.message_modifier']
+        App\AdherentMessage\Sender\SenderInterface:
+            tags: ['app.adherent_message.sender']
+        App\TerritorialCouncil\Handlers\TerritorialCouncilMembershipHandlerInterface:
+            tags: ['app.adherent.territorial_council_membership.handler']
+        Symfony\Component\Messenger\Handler\MessageHandlerInterface:
+            tags: ['messenger.message_handler']
+        App\Redirection\Dynamic\RedirectToInterface:
+            tags: ['app.redirection.handler']
+        App\VotingPlatform\AdherentMandate\Factory\AdherentMandateFactoryInterface:
+            tags: ['app.voting_platform.mandate_factory']
+        App\Instance\InstanceQualityUpdater\QualityUpdaterInterface:
+            tags: ['app.instance.quality_updater']
+        App\Scope\Generator\ScopeGeneratorInterface:
+            tags: ['app.adherent.scope_generator']
+        App\ManagedUsers\Filter\ManagedUsersFilterFactoryInterface:
+            tags: ['app.managed_user.filer_factory']
+        App\AdherentFilter\FilterBuilder\AdherentFilterBuilderInterface:
+            tags: [ 'app.adherent_filter.builder' ]
+        App\OAuth\App\AuthAppUrlGeneratorInterface:
+            tags: [ 'app.auth_app.url_generator' ]
+
+    # Imports
+    App\:
+        resource: '../src/*'
+        exclude:
+            - '../src/Admin'
+            - '../src/Algolia'
+            - '../src/DependencyInjection'
+            - '../src/Entity'
+            - '../src/Exception'
+            - '../src/Kernel.php'
+            - '../src/Mailchimp'
+            - '../src/Monolog'
+            - '../src/Security'
+            - '../src/Twig'
+
+    App\Algolia\:
+        resource: '../src/Algolia/'
+        exclude: '../src/Algolia/Sonata/{Pager,ProxyQuery}'
+
+    App\Controller\:
+        resource: ../src/Controller/
+        tags: [ 'controller.service_arguments' ]
+
+    App\Controller\Admin\:
+        resource: ../src/Controller/Admin
+        public: true
+        tags: [ 'controller.service_arguments' ]
+
+    # Services
+
+    App\Map\StaticMapProviderInterface: '@app.map.google_maps_static_provider'
+
+    App\Adherent\Handler\RemoveAdherentAndRelatedDataCommandHandler:
+        arguments:
+            $handlers: !tagged_iterator 'app.adherent.unregistration.handler'
+
+    App\Adherent\Certification\CertificationRequestProcessCommandHandler:
+        arguments:
+            $handlers: !tagged_iterator 'app.adherent.certification_request.handler'
+
+    App\Adherent\Handler\AdherentUpdateTerritorialCouncilMembershipsCommandHandler:
+        arguments:
+            $handlers: !tagged_iterator 'app.adherent.territorial_council_membership.handler'
+
+    App\Redirection\Dynamic\RedirectionsSubscriber:
+        arguments: [!tagged_iterator 'app.redirection.handler']
+
+    App\AdherentMessage\Listener\InitialiseMailchimpCampaignEntitySubscriber:
+        arguments: [!tagged_iterator 'app.adherent_message.mailchimp.campaign.handler']
+
+    App\AdherentMessage\Listener\UpdateTransactionalAdherentMessageDataListener:
+        arguments: [!tagged_iterator 'app.adherent_message.transaction.message_modifier']
+
+    App\AdherentMessage\AdherentMessageManager:
+        arguments:
+            $senders: !tagged_iterator 'app.adherent_message.sender'
+
+    App\ManagedUsers\ManagedUsersFilterFactory:
+        arguments:
+            $factories: !tagged_iterator 'app.managed_user.filer_factory'
+
+    App\OAuth\App\AuthAppUrlManager:
+        arguments:
+            $urlGenerators: !tagged_iterator {tag: 'app.auth_app.url_generator', default_index_method: 'getAppCode'}
+
+    App\OAuth\AuthorizationServerFactory:
+        arguments:
+            $privateKey: '%env(SSL_PRIVATE_KEY)%'
+            $encryptionKey: '%env(SSL_ENCRYPTION_KEY)%'
+            $accessTokenTtlInterval: '%env(ACCESS_TOKEN_TTL_INTERVAL)%'
+            $refreshTokenTtlInterval: '%env(REFRESH_TOKEN_TTL_INTERVAL)%'
+
+    App\AdherentMessage\MessageLimiter:
+        arguments:
+            -
+                referent: '%adherent_message_referent_limit%'
+                committee: '%adherent_message_committee_limit%'
+                deputy: '%adherent_message_deputy_limit%'
+                senator: '%adherent_message_senator_limit%'
+
+    App\AdherentMessage\Listener\AdherentMessageChangeSubscriber:
+        tags: ['doctrine.event_subscriber']
+
+    App\Coalition\Listener\FollowerChangeSubscriber:
+        tags: ['doctrine.event_subscriber']
+
+    App\Normalizer\JecouteAdherentNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: 1}]
+
+    App\Normalizer\AdherentNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: 10}]
+
+    App\Normalizer\JecouteDeviceNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: 1}]
+
+    App\Normalizer\DeviceNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: 10}]
+
+    App\Normalizer\JecouteRegionNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: 1}]
+
+    App\Normalizer\ItemNormalizerDecorator:
+        decorates: 'api_platform.serializer.normalizer.item'
+        arguments: ['@App\Normalizer\ItemNormalizerDecorator.inner']
+
+    App\Normalizer\Indexer\ThrowExceptionNormalizer:
+        tags: [{name: 'serializer.normalizer', priority: -801}] # to be just after CustomNormalizer
+
+    App\Committee\EventListener\CommitteeSubscriber:
+        arguments:
+            $producer: '@old_sound_rabbit_mq.sync_api_producer'
+
+    App\Scope\GeneralScopeGenerator:
+        arguments:
+            $generators: !tagged_iterator 'app.adherent.scope_generator'
+
+    App\Algolia\SearchService:
+        decorates: 'search.service'
+        arguments:
+            - '@App\Algolia\SearchService.inner'
+            - '%kernel.debug%'
+
+    Geocoder\Geocoder: '@bazinga_geocoder.geocoder'
+
+    League\Flysystem\Filesystem:
+        arguments:
+            - !service
+                class: 'League\Flysystem\AdapterInterface'
+                factory: 'App\Storage\FilesystemAdapterFactory::createAdapter'
+                arguments:
+                    - '%kernel.environment%'
+                    - '%kernel.project_dir%/app/data'
+                    - '%env(GCLOUD_BUCKET)%'
+                    - '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'
+
+    League\Flysystem\FilesystemInterface: '@League\Flysystem\Filesystem'
+
+    App\Recaptcha\RecaptchaApiClient:
+        arguments:
+            $privateKey: '%env(RECAPTCHA_PRIVATE_KEY)%'
+            $config:
+                timeout: 5.0
+                environment: '%kernel.environment%'
+
+    App\Procuration\ProcurationProxyMessageFactory:
+        arguments:
+            $replyToEmailAddress: '%procurations_reply_to_email%'
+
+    Lexik\Bundle\PayboxBundle\Paybox\System\Cancellation\Request: '@lexik_paybox.request_cancellation_handler'
+    Lexik\Bundle\PayboxBundle\Paybox\System\Base\Request: '@lexik_paybox.request_handler'
+
+    Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory'
+    Symfony\Bridge\PsrHttpMessage\HttpFoundationFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory'
+
+    League\OAuth2\Server\AuthorizationValidators\AuthorizationValidatorInterface: '@App\OAuth\AuthorizationValidators\JsonWebTokenValidator'
+    League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface: '@App\OAuth\Store\AccessTokenStore'
+    League\OAuth2\Server\Repositories\UserRepositoryInterface: '@App\OAuth\Repository\OAuthUserRepository'
+    League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface: '@App\OAuth\Store\AuthorizationCodeStore'
+    League\OAuth2\Server\Repositories\ClientRepositoryInterface: '@App\OAuth\Store\ClientStore'
+    League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface: '@App\OAuth\Store\RefreshTokenStore'
+    League\OAuth2\Server\Repositories\ScopeRepositoryInterface: '@App\OAuth\Store\ScopeStore'
+
+    League\OAuth2\Server\AuthorizationServer:
+        factory: 'App\OAuth\AuthorizationServerFactory:createServer'
+
+    League\OAuth2\Server\ResourceServer:
+        arguments:
+            $publicKey: '%env(SSL_PUBLIC_KEY)%'
+
+    Symfony\Component\Security\Http\Logout\LogoutUrlGenerator: '@security.logout_url_generator'
+
+    Sonata\AdminBundle\Builder\ShowBuilderInterface: '@sonata.admin.builder.orm_show'
+    Sonata\Exporter\Exporter: '@sonata.exporter.exporter'
+
+    App\Producer\MailerProducer: '@old_sound_rabbit_mq.mailer_transactional_producer'
+
+    Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider: ~
+
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+        arguments:
+            - '@snc_redis.default'
+            - {ttl: '%env(SESSION_TTL)%', prefix: 'session'}
+
+    App\VotingPlatform\AdherentMandate\AdherentMandateFactory:
+        arguments: [!tagged_iterator 'app.voting_platform.mandate_factory']
+
+    App\Instance\Handler\UpdateInstanceQualitiesCommandHandler:
+        arguments:
+            $qualityUpdaters: !tagged_iterator 'app.instance.quality_updater'
+
+    api_platform.subresource_operation_factory:
+        class: App\Api\ApiPlatform\Core\Operation\Factory\SubresourceOperationFactory
+        arguments:
+            - '@api_platform.metadata.resource.metadata_factory'
+            - '@api_platform.metadata.property.name_collection_factory'
+            - '@api_platform.metadata.property.metadata_factory'
+            - '@api_platform.path_segment_name_generator'
+
+    App\OvhCloud\Driver:
+        arguments:
+            - '@app.http_client.ovh_cloud'
+            - '%env(OVHCLOUD_APPLICATION_KEY)%'
+            - '%env(OVHCLOUD_APPLICATION_SECRET)%'
+            - '%env(OVHCLOUD_CONSUMER_KEY)%'
+            - '%env(OVHCLOUD_SERVICE_NAME)%'
+            - '%env(OVHCLOUD_SMS_SENDER_NAME)%'
+
+    App\AdherentFilter\AdherentFiltersGenerator:
+        arguments: [!tagged_iterator 'app.adherent_filter.builder']
+
+    App\Firebase\JeMarcheMessaging:
+        lazy: true
+
+    App\Api\Serializer\RiposteGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: ['@App\Api\Serializer\RiposteGroupsContextBuilder.inner']
+
+    App\Api\Serializer\JecouteNewsGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: ['@App\Api\Serializer\JecouteNewsGroupsContextBuilder.inner']
+
+    App\Api\Serializer\EventGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: ['@App\Api\Serializer\EventGroupsContextBuilder.inner']
+
+    App\SmsCampaign\Listener\AdherentChangeSmsNotificationListener:
+        tags: [{name: 'monolog.logger'}]
+
+    Symfony\Bridge\Monolog\Processor\TokenProcessor:
+        tags: ['monolog.processor']
+    Symfony\Bridge\Monolog\Processor\SwitchUserTokenProcessor:
+        tags: ['monolog.processor']
+
+    App\ErrorRenderer\TwigErrorRenderer:
+        decorates: 'twig.error_renderer.html'
+        arguments:
+            $fallbackErrorRenderer: '@App\ErrorRenderer\TwigErrorRenderer.inner'
+            $debug: !service
+                class: 'bool'
+                factory: Symfony\Bridge\Twig\ErrorRenderer\TwigErrorRenderer::isDebug
+                arguments:
+                    - '@request_stack'
+                    - '%kernel.debug%'

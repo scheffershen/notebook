@@ -1,0 +1,11 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.isOfJemarcheDataSurvey %}
+        Libre
+    {% elseif object.isOfPapCampaignHistory %}
+        PAP
+    {% elseif object.isOfPhoningCampaignHistory %}
+        Phoning
+    {% endif %}
+{% endblock %}

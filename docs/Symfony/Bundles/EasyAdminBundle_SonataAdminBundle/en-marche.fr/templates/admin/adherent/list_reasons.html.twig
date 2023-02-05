@@ -1,0 +1,9 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <ul>
+        {% for reason in object.reasons %}
+            <li>{{ reason|trans({}, 'forms') }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

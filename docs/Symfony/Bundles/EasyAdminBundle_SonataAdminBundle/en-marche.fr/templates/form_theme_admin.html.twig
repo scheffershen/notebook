@@ -1,0 +1,676 @@
+{% extends '@SonataDoctrineORMAdmin/Form/form_admin_fields.html.twig' %}
+
+{% block measure_entry_row %}
+    <div class="row">
+        <div class="col-xs-4">
+            {{ form_row(form.key, { required: true }) }}
+        </div>
+        <div class="col-xs-4">
+            {{ form_row(form.value, { required: true }) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_admin_donator_referenceDonation_entity_widget %}
+    {% import 'admin/donation/_macros.html.twig' as macros %}
+
+    {% set donator = form.parent.vars.value %}
+    {% set currentReferenceDonation = donator.referenceDonation %}
+    {% set currentValue = currentReferenceDonation ? currentReferenceDonation.id : null %}
+    <table class="table table-bordered table-striped sonata-ba-list">
+        <thead>
+            <tr class="sonata-ba-list-field-header">
+                <th class="sonata-ba-list-field-header-text">Don de<br>référence</th>
+                <th class="sonata-ba-list-field-header-text">Montant</th>
+                <th class="sonata-ba-list-field-header-text">Type</th>
+                <th class="sonata-ba-list-field-header-text">Date</th>
+                <th class="sonata-ba-list-field-header-text">Status</th>
+                <th class="sonata-ba-list-field-header-text">Transactions</th>
+                <th class="sonata-ba-list-field-header-text">Détails</th>
+                <th class="sonata-ba-list-field-header-text" width="200px">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for choice in form.children %}
+                <tr>
+                    <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                        <div class="radio">
+                            <label>
+                                <input type="radio"
+                                       id="{{ choice.vars.id }}"
+                                       name="{{ choice.vars.full_name }}"
+                                       value="{{ choice.vars.value }}"
+                                        {% if currentValue == choice.vars.value %} checked {% endif %}
+                                />
+                            </label>
+                        </div>
+                    </td>
+                    {% if choice.vars.value %}
+                        {% set donation = form.vars.choices[choice.vars.value].data %}
+
+
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {{ donation.amountInEuros|localizedcurrency('EUR') }}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {{ macros.get_donation_type_badge(donation.type) }}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {{ donation.donatedAt|localizeddate }}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {{ macros.get_donation_status_badge(donation.status) }}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            {% if donation.type is constant('App\\Entity\\Donation::TYPE_CB') and not donation.transactions.isEmpty %}
+                                <ol>
+                                    {% for transaction in donation.transactions %}
+                                        <li>
+                                            <span class="badge {% if transaction.isSuccessful %}bg-green{% else %}bg-red{% endif %}">
+                                                {{ ('transaction.result_code.' ~ transaction.payboxResultCode)|trans }}
+                                            </span>
+                                            le {{ transaction.payboxDateTime|localizeddate }}
+                                        </li>
+                                    {% endfor %}
+                                </ol>
+                            {% endif %}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            Adresse: {{ donation.getInlineFormattedAddress }}
+                            <br>
+                            Nationalité: {{ donation.nationality }}
+                        </td>
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                            <a href="{{ path('admin_app_donation_edit', { id: choice.vars.value }) }}" target="_blank">
+                                Voir le détail
+                            </a>
+                        </td>
+                    {% else %}
+                        <td class="sonata-ba-list-field sonata-ba-list-field-text" colspan="7">
+                            {{ choice.vars.label }}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            <tr>
+                <th class="sonata-ba-list-field-header-text">Montant total donné</th>
+                <td class="sonata-ba-list-field sonata-ba-list-field-text">
+                    {{ donator.getTotalDonated|localizedcurrency('EUR') }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block app_admin_donation_file_row -%}
+    {{ block('form_row') }}
+
+    {% set object = form.parent.vars.value %}
+    {% if object.filename is defined and object.filename is not empty %}
+        <a href="{{ path('app_admin_donation_file', { id: object.id }) }}" target="_blank">
+            <i class="fa fa-link" aria-hidden="true"></i> Voir le fichier uploadé
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block app_admin_elected_representative_mandate_geoZone_zone_widget %}
+    <div class="row">
+        <div class="form-group">
+            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                <input type="text" value="{{ form.vars.zone_label }}" id="{{ form.vars.id }}_autocomplete" class="form-control"/>
+            </div>
+        </div>
+        {{ form_row(form) }}
+    </div>
+{% endblock %}
+
+{% block app_admin_elected_representative_mandates_sonata_type_collection_row -%}
+    <div class="mandates-collection">
+        {{ block('form_row') }}
+    </div>
+
+    <div class="help-inline">
+        Pour supprimer des mandats, vous devez supprimer aussi les fonctions associées à ces mandats.
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("div.mandates-collection").on('ifToggled change', "select[id$='_isElected'], input[id$='_onGoing']", function() {
+                var elementId = $(this).attr('id');
+                if (elementId.includes('_isElected')) {
+                    var isElected = $(this);
+                    var onGoing = $('#'+elementId.replace('isElected', 'onGoing'));
+                    var finishAt = $('#'+elementId.replace('isElected', 'finishAt'));
+                } else {
+                    var isElected = $('#'+elementId.replace('onGoing', 'isElected'));
+                    var onGoing = $(this);
+                    var finishAt = $('#'+elementId.replace('onGoing', 'finishAt'));
+                }
+                finishAt.prop('disabled', ('1' !== isElected.val() || onGoing.is(':checked')));
+            });
+
+            $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('change');
+            $("select[id$='_isElected']").trigger('ifToggled');
+
+            $('div.mandates-collection').on('sonata.add_element', function () {
+
+                $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('change');
+                $("select[id$='_isElected']").trigger('ifToggled');
+
+                addAutocomplete();
+            });
+
+            var addAutocomplete = function () {
+                $("input[id$='_geoZone_autocomplete']").each(function (i, el) {
+                    el = $(el);
+                    el.autocomplete({
+                        source: function(request, response) {
+                            var elementId = el.attr('id');
+                            var id = elementId.substr(0, elementId.indexOf('_geoZone_autocomplete'));
+                            var type = el.parents('.row').find("select[id$='" + id + "_type']").val();
+                            var term = request.term.trim();
+
+                            if (term.length > 0) {
+                                $.get("{{ path('app_admin_zone_autocomplete')|raw }}?zone=" + term + "&type=" + type, function(data) {
+                                    response($.map(data, function(m) {
+                                        return {
+                                            label: m.name_code,
+                                            value: m.id
+                                        };
+                                    }));
+                                });
+                            } else {
+                                response([]);
+                            }
+                        },
+                        select: function( event, ui ) {
+                            var elementId = el.attr('id');
+                            var id = elementId.substr(0, elementId.indexOf('_geoZone'));
+                            var zoneIdField = el.parents('.row').find("input[id$='" + id + "_geoZone']");
+                            $(el).val(ui.item.label);
+                            $(zoneIdField).val(ui.item.value);
+
+                            return false;
+                        },
+                    });
+                });
+            };
+
+            addAutocomplete();
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_elected_representative_politicalFunctions_sonata_type_collection_politicalFunctions_row -%}
+    <div class="political-functions-collection">
+        {{ block('form_row') }}
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("div.political-functions-collection").on('ifToggled', "input[id$='_onGoing']", function() {
+                var onGoingId = $(this).attr('id');
+                $('#'+onGoingId.replace('onGoing', 'finishAt')).prop('disabled', $(this).is(':checked'));
+            });
+
+            $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('ifToggled');
+            $('div.political-functions-collection').on('sonata.add_element', function () {
+                $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('ifToggled');
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_elected_representative_label_name_text_widget -%}
+    {% set shouldSetOther = form.vars.value is not empty and form.vars.value not in constant('App\\Entity\\ElectedRepresentative\\LabelNameEnum::ALL') %}
+    <select id="{{ form.vars.id }}-label-names" class="filter__field form form__field">
+        <option value="" {{ form.vars.value is not empty ? 'selected="selected"' }}></option>
+        {% for key, label in constant('App\\Entity\\ElectedRepresentative\\LabelNameEnum::ALL') %}
+            <option value="{{ label }}" {{ form.vars.value == label or (shouldSetOther and label == constant('App\\Entity\\ElectedRepresentative\\LabelNameEnum::OTHER')) ? 'selected="selected"' }}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    {{ form_widget(form, { attr: { style: "margin-top: 15px;" } }) }}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var other = '{{ constant('App\\Entity\\ElectedRepresentative\\LabelNameEnum::OTHER') }}';
+            var labelNamesSelect = $('#{{ form.vars.id }}-label-names');
+            {% if form.vars.value is not empty and form.vars.value not in constant('App\\Entity\\ElectedRepresentative\\LabelNameEnum::ALL') %}
+            $(labelNamesSelect).val(other);
+            {% endif %}
+
+            var toggleLabel = function(setEmpty = false) {
+                var selectedValue = $(labelNamesSelect).val();
+                if (selectedValue === other) {
+                    if (setEmpty) {
+                        $('#{{ form.vars.id }}').val('');
+                    }
+                    $('#{{ form.vars.id }}').show();
+                } else {
+                    $('#{{ form.vars.id }}').hide();
+                    $('#{{ form.vars.id }}').val(selectedValue);
+                }
+            };
+
+            labelNamesSelect.change(function() {
+                toggleLabel(true);
+            });
+
+            toggleLabel();
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_elected_representative_labels_sonata_type_collection_labels_row -%}
+    <div class="elected-representative-labels-collection">
+        {{ block('form_row') }}
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("div.elected-representative-labels-collection").on('ifToggled', "input[id$='_onGoing']", function() {
+                var onGoingId = $(this).attr('id');
+                var id = onGoingId.substr(0, onGoingId.indexOf('_onGoing'));
+                id = id.substr(id.length - 1);
+
+                if ($(this).is(':checked')) {
+                    $(this).parents('.row').find("div[id$='" + id + "_finishYear']").addClass('select2-container-disabled');
+                } else {
+                    $(this).parents('.row').find("div[id$='" + id + "_finishYear']").removeClass('select2-container-disabled');
+                }
+            });
+
+            $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('ifToggled');
+            $('div.elected-representative-labels-collection').on('sonata.add_element', function () {
+                $("div.icheckbox_square-blue input[id$='_onGoing']").trigger('ifToggled');
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_elected_representative_sponsorships_sonata_type_native_collection_sponsorships_widget -%}
+    <table class="table table-bordered table-striped sonata-ba-list">
+        <thead>
+        <tr class="sonata-ba-list-field-header">
+            <th class="sonata-ba-list-field-header-text col-md-3">Élection présidentielle</th>
+            <th class="sonata-ba-list-field-header-text">Candidat</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{ form_widget(form) }}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block app_admin_elected_representative_sponsorship_sponsorships_sponsorships_entry_widget -%}
+    <tr>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text col-md-3">
+            {{ form_row(form.presidentialElectionYear) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {% set years = constant('App\\Entity\\ElectedRepresentative\\CandidateNameEnum::ALL') %}
+            {% set candidates = years[form.presidentialElectionYear.vars.value] %}
+            {% set shouldSetOther = form.candidate.vars.value is not empty and form.candidate.vars.value not in candidates %}
+            <select id="{{ form.candidate.vars.id }}-candidate-names" class="filter__field form form__field">
+                <option value="" {{ form.candidate.vars.value is not empty ? 'selected="selected"' }}></option>
+
+                {% for year, candidates in constant('App\\Entity\\ElectedRepresentative\\CandidateNameEnum::ALL') %}
+                    <optgroup label="{{ year }}">
+                        {% for candidate in candidates %}
+                            <option value="{{ candidate }}" {{ form.candidate.vars.value == candidate or (shouldSetOther and candidate == constant('App\\Entity\\ElectedRepresentative\\CandidateNameEnum::OTHER')) ? 'selected="selected"' }}>{{ candidate }}</option>
+                        {% endfor %}
+                    </optgroup>
+                {% endfor %}
+
+            </select>
+            {{ form_row(form.candidate, { attr: { style: "margin-top: 15px;" } }) }}
+        </td>
+    </tr>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var other = '{{ constant('App\\Entity\\ElectedRepresentative\\CandidateNameEnum::OTHER') }}';
+            var year = $('#{{ form.presidentialElectionYear.vars.id }}').val();
+            var candidateNamesSelect = $('#{{ form.candidate.vars.id }}-candidate-names');
+            candidateNamesSelect.find("optgroup:not([label='" + year + "'])").remove();
+            {% if shouldSetOther %}
+                candidateNamesSelect.val(other);
+            {% endif %}
+
+            var toggleLabel = function(setEmpty = false) {
+                var selectedValue = candidateNamesSelect.val();
+                if (selectedValue === other) {
+                    if (setEmpty) {
+                        $('#{{ form.candidate.vars.id }}').val('');
+                    }
+                    $('#{{ form.candidate.vars.id }}').show();
+                } else {
+                    $('#{{ form.candidate.vars.id }}').hide();
+                    $('#{{ form.candidate.vars.id }}').val(selectedValue);
+                }
+            };
+
+            candidateNamesSelect.change(function() {
+                toggleLabel(true);
+            });
+
+            toggleLabel();
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_mooc_mooc_image_row -%}
+    {{ block('admin_image_with_url_row') }}
+{% endblock %}
+
+{% block app_admin_mooc_element_image_row -%}
+    {{ block('admin_image_with_url_row') }}
+{% endblock %}
+
+{% block admin_image_with_url_row %}
+    {{ block('form_row') }}
+
+    {% if value %}
+        <div>
+            <p><em>Image actuelle:</em></p>
+            <p class="text-center">
+                <img class="img-thumbnail" src="{{ path('asset_url', { path: value.filePath }) }}">
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block city_manager_row %}
+    <tr>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_label(form) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_widget(form.phone.country) }}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    {{ form_widget(form.phone.number) }}
+                </div>
+                {{ form_errors(form.phone) }}
+            </div>
+        </td>
+    </tr>
+{% endblock %}
+
+{% block city_prevision_row %}
+    <tr>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_label(form) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.strategy) }}
+            {{ form_errors(form.strategy) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.alliances) }}
+            {{ form_errors(form.alliances) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.allies) }}
+            {{ form_errors(form.allies) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.validatedBy) }}
+            {{ form_errors(form.validatedBy) }}
+        </td>
+    </tr>
+{% endblock %}
+
+{% block city_candidate_row %}
+    <tr>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.investitureType) }}
+            {{ form_errors(form.investitureType) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.gender) }}
+            {{ form_errors(form.gender) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.politicalScheme) }}
+            {{ form_errors(form.politicalScheme) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_row(form.agreement) }}
+        </td>
+    </tr>
+    <tr>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.phone) }}
+            {{ form_errors(form.phone) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.profile) }}
+            {{ form_errors(form.profile) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.alliances) }}
+            {{ form_errors(form.alliances) }}
+        </td>
+        <td class="sonata-ba-list-field sonata-ba-list-field-text">
+            {{ form_widget(form.eligibleAdvisersCount) }}
+            {{ form_errors(form.eligibleAdvisersCount) }}
+        </td>
+    </tr>
+{% endblock %}
+
+{% block app_admin_voting_platform_designation_referentTags_entity_widget %}
+    {{ form_widget(form) }}
+
+    <div>
+        <script type="application/javascript">
+            function toggleCheckRefTags(checked) {
+                var options = $('#{{ form.vars.id }} > option');
+
+                if (checked) {
+                    options.prop('selected', 'selected');
+                } else {
+                    options.removeAttr('selected');
+                }
+
+                return false;
+            }
+        </script>
+
+        <button onClick="return toggleCheckRefTags(true);" class="btn btn-xs btn-primary">Tout sélectionner <span class="glyphicon glyphicon-ok-circle"></span></button>
+
+        <button onClick="return toggleCheckRefTags(false);" class="btn btn-xs btn-primary">Tout désélectionner <span class="glyphicon glyphicon-remove-circle"></span></button>
+    </div>
+{% endblock %}
+
+{% block app_admin_adherent_adherent_territorial_council_membership_row %}
+    {{ block('form_row') }}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("div.territorial-council-member-info").on('select2:unselecting change', "select[id$='TerritorialCouncil']", function() {
+                    var elementId = $(this).attr('id');
+                    var elementValue = $(this).val();
+
+                    $("select[id$='TerritorialCouncil']").each(function (i, element) {
+                        if (elementId != $(element).attr('id')) {
+                            $(element).prop('disabled', elementValue !== '');
+                        }
+                    });
+            });
+
+            $("select[id$='TerritorialCouncil']").each(function (i, element) {
+                if ($(element).val() !== '') {
+                    $("select[id$='TerritorialCouncil']").each(function (i, el) {
+                        if ($(element).attr('id') != $(el).attr('id')) {
+                            $(el).prop('disabled', $(element).val() !== '');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_adherent_electedRepresentative_text_row %}
+    {% set adherent = form.parent.vars.value %}
+    {% set elected_representative = get_elected_representative(adherent) %}
+    {% if not elected_representative %}
+        L'adhérent n'est pas un élu.
+    {% else %}
+        <div class="form-group">
+            <label class="control-label">
+                ID élu
+            </label>
+
+            <div class="inline-block">
+                <div class="left row col-md-5">
+                    <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                        <input type="text" disabled="disabled" required="required" class=" form-control" value="{{ elected_representative.id }}">
+                    </div>
+                </div>
+                <div class="rigth row col-md-7">
+                    <a class="btn elected-representative-link" title="Fiche élu"
+                       target="_blank" rel="noopener noreferrer"
+                       href="{{ path('admin_app_electedrepresentative_electedrepresentative_edit', { id: elected_representative.id }) }}">
+                        Voir <i class="fa fa-external-link"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">
+                Labels
+            </label>
+            <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                <div style="width: 100%;">
+                    {% for listDefinition in elected_representative.userListDefinitions %}
+                        <span class="elected-representative-label" style="{{ listDefinition.color ? 'background-color: '~listDefinition.color  : 'color: #333;' }}">
+                            {{ listDefinition.label }}
+                        </span>
+                    {% else %}
+                        <span>Aucun label</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {% if elected_representative.currentMandates|length > 0 %}
+            {% set mandates = elected_representative.currentMandates %}
+            {% set label = 'Mandats en cours' %}
+        {% else %}
+            {% set mandates = elected_representative.finishedMandates %}
+            {% set label = 'Mandats passés' %}
+        {% endif %}
+
+        {% if mandates|length > 0 %}
+            <div class="form-group">
+                <label class="control-label">
+                    {{ label }}
+                </label>
+                <div class="sonata-ba-field sonata-ba-field-standard-natural">
+                {% for mandate in mandates %}
+                    <div>{{ mandate.name }} {{ mandate.lastPoliticalFunction ? '- '~mandate.lastPoliticalFunction : '' }} ({{ mandate.geoZone }})</div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block app_admin_file_file_parent_widget %}
+    {{ form_widget(form) }}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var addAutocomplete = function () {
+                $("#{{ form.vars.id }}").each(function (i, el) {
+                    el = $(el);
+                    el.autocomplete({
+                        source: function(request, response) {
+                            var term = request.term.trim();
+
+                            if (term.length > 0) {
+                                $.get("{{ path('app_admin_files_autocomplete_file_directory')|raw }}?term=" + term, function(data) {
+                                    response($.map(data, function(d) {
+                                        return {
+                                            label: d.name,
+                                            value: d.id
+                                        };
+                                    }));
+                                });
+                            } else {
+                                response([]);
+                            }
+                        },
+                        select: function( event, ui ) {
+                            $(el).val(ui.item.label);
+
+                            return false;
+                        },
+                    });
+                });
+            };
+
+            addAutocomplete();
+        });
+    </script>
+{% endblock %}
+
+{% block app_admin_jecoute_riposte_sourceUrl_url_row -%}
+    {{ block('form_row') }}
+
+    {% set object = form.parent.vars.value %}
+    {% set openGraph = object.openGraph %}
+    {% if object.openGraph is not empty %}
+        <div class="well">
+            <div class="media">
+                <div class="media-left">
+                    {% if openGraph.image is defined and openGraph.image is not null %}
+                        <img class="media-object" style="max-width: 100px;" src="{{ openGraph.image }}">
+                    {% endif %}
+                </div>
+                <div class="media-body">
+                    {% if openGraph.title is defined and openGraph.title is not null %}
+                        <h4 class="media-heading">{{ openGraph.title }}</h4>
+                    {% endif %}
+                    {% if openGraph.description is defined and openGraph.description is not null %}
+                        {{ openGraph.description[:50] }}
+                        {%- if openGraph.description|length > 50 %}...{% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block app_admin_adherent_subscriptionTypes_entity_row %}
+    {% set object = form.parent.vars.data %}
+    <span class="text-bold">Abonnement Mailchimp</span>
+    <p>{{ include('admin/adherent/partial/_email_subscription_status.html.twig') }}</p>
+
+    {{ block('form_row') }}
+
+    <a href="{{ form.vars.sonata_admin.admin.generateObjectUrl('send_resubscribe_email', object) }}" class="btn btn-primary">Envoyer un email de réabonnement</a>
+{% endblock %}

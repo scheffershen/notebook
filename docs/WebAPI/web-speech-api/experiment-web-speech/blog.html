@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Web Speech API - Synthesis</title>
+    <link rel="stylesheet" href="../index.css" />
+  </head>
+  <body>
+    <nav>
+      <li>
+        <a href="/">Homepage</a>
+      </li>
+      <li>
+        <a href="/pages/blog.html">Blog</a>
+      </li>
+      <li>
+        <a href="/pages/contact.html">Contact</a>
+      </li>
+    </nav>
+
+    <button id="play-button" disabled="disabled">Play</button>
+    <button id="pause-button" disabled="disabled">Pause</button>
+    <button id="resume-button" disabled="disabled">Resume</button>
+    <button id="cancel-button" disabled="disabled">Stop</button>
+
+    <article id="blog-post">
+      <h1>
+        How to prevent broken Nuxt builds from deploying your site on Netlify?
+      </h1>
+      <p>
+        We love fast Nuxt builds on Netlify. But some builds ended up being
+        impossibly fast. Turns out when a Nuxt build produces errors, the
+        Netlify deploy still succeeds. In other words, broken Nuxt sites end up
+        live in production. So how can we avoid this?
+      </p>
+      <img
+        src="https://www.datocms-assets.com/6524/1566230397-netlify-nuxt-generate-broken-live.jpg"
+      />
+      <h2>Help failing</h2>
+      <p>
+        Nuxt has no documentation online on how to abort builds with errors.
+        Luckily there is something in the output of "nuxt generate --help
+        command":
+      </p>
+      <img
+        src="https://www.datocms-assets.com/6524/1566230651-nuxt-generate-help-shadowless.png"
+      />
+      <p>
+        Turns out, all we need to do is add a "--fail-on-error" flag to our
+        build command:
+      </p>
+      <p class="code">nuxt generate --fail-on-error</p>
+      <p>That’s it!</p>
+    </article>
+
+    <script src="/scripts/blog.js"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+body {
+  font-family: sans-serif;
+  margin: 5rem auto;
+  max-width: 45rem;
+  width: 90%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0 auto 5rem;
+  max-width: 20rem;
+}
+
+nav a {
+  color: blue;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+img,
+p {
+  margin-bottom: 2rem;
+}
+
+h1,
+h2 {
+  color: blue;
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.75;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+button {
+  margin-right: 0.25rem;
+  padding: 0.25rem 1rem;
+}
+
+article:last-child {
+  margin-bottom: 0;
+}
+
+.code {
+  background-color: #fffed9;
+  color: blue;
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 90%;
+}
+
+label {
+  align-items: center;
+  color: blue;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+input,
+textarea {
+  border: none;
+  border-bottom: 1px solid blue;
+  flex-grow: 1;
+  font-size: inherit;
+  margin-left: 1rem;
+  max-width: 350px;
+  padding: 0.5rem 0;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 1px 0 0 blue;
+}
+
+textarea {
+  resize: vertical;
+}
+
+form button {
+  background-color: blue;
+  border-radius: 0;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-size: inherit;
+  margin: 0;
+  margin-top: 2rem;
+  padding: 0.75rem 5rem;
+  width: fit-content;
+}
+
+form button:focus,
+form button:hover {
+  background-color: transparent;
+  border: 2px solid blue;
+  color: blue;
+  outline: none;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 5rem;
+  width: 80%;
+}

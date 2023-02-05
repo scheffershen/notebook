@@ -1,0 +1,8 @@
+# service_test.yaml
+
+imports:
+    - 'services.yaml'
+    
+    // We override the original http client injected with App\FakeHttpClient
+    App\UserExistService:
+      - $httpClient: '@App\FakeHttpClient'

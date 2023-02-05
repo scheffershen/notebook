@@ -1,0 +1,9 @@
+{% extends "app/formLayout.twig" %}
+
+{% block header %}<h1>Create your Application</h1>{% endblock %}
+
+{% block app_form %}
+    <form class="bs-example form-horizontal" action="{{ path('app_create') }}" method="post">
+        {{ include('app/_form.twig') }}
+    </form>
+{% endblock %}

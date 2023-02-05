@@ -80,12 +80,12 @@ const config = {
       },
       footer: {
         style: "dark",
-        /*links: [
+        links: [
           {
             title: "Docs",
             items: [
               {
-                label: "Tutorial",
+                label: "My notes",
                 to: "/docs/intro",
               },
             ],
@@ -94,16 +94,16 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                label: "GitHub",
+                href: "https://github.com/scheffershen",
               },
               {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
+                label: "LinkedIn",
+                href: "https://linkedin.com/in/shen-yi-333611b/",
               },
               {
                 label: "Twitter",
-                href: "https://twitter.com/docusaurus",
+                href: "https://twitter.com/scheffer_shen",
               },
             ],
           },
@@ -111,16 +111,16 @@ const config = {
             title: "More",
             items: [
               {
-                label: "Blog",
-                to: "/blog",
+                label: "PayPal",
+                href: "https://paypal.me/yishen1963?country.x=FR&locale.x=fr_FR",
               },
               {
-                label: "GitHub",
-                href: `https://github.com/scheffershen/notebook`,
+                label: "CV",
+                href: `https://scheffershen.github.io/online-cv/`,
               },
             ],
           },
-        ],*/
+        ],
         copyright: `My notes, Built with Docusaurus.`,
       },      
       prism: {
