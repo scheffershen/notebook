@@ -225,6 +225,11 @@ Elle est particulièrement utile pour supprimer des fichiers de l’index afin q
 
     $ git commit -m "done something"
 
+## tag 
+
+    $ git tag -a v1.0 -m "vesrion 1.0"
+    $ git push origin v1.0
+
 ## push
 
     $ git checkout master

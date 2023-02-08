@@ -1,6 +1,22 @@
 Developpeur resources
 =====================
 
+## Filechat.io
+
+Filechat is the perfect tool to explore documents using artificial intelligence. Simply upload your PDF and start asking questions to your personalized chatbot. Sign up for a free trial today, no credit card required.
+
+### @HumataAI
+
+lets you upload a .pdf up to 60 pages long & allows you to ask questions about it in plain English! 🔥
+
+## https://typeset.io/
+
+Your AI Copilot to decode any research paper
+- The quickest way to read and understand scientific literature
+- Highlight confusing text, math, and tables to get a simple explanation
+- Ask follow-up questions and get instant answers
+- A new way to search and find relevant papers without specifying keywords
+
 ### Study Azure for FREE
 
 - Azure Introduction: https://bowtiedcyber.substack.com/p/introduction-to-microsoft-azure
@@ -164,7 +180,3 @@ Main language: Jupyter Notebook
 https://github.com/karpathy/nanoGPT
 
 ### text-To-Video AND Image-To-Video
-
-### @HumataAI
-
-lets you upload a .pdf up to 60 pages long & allows you to ask questions about it in plain English! 🔥
