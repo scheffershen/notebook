@@ -10,14 +10,39 @@ Jupyter and JupyterLab are great tools for data science.
 ## Running with Docker Compose
 
 ```yaml
-jupyter:
-  image: jupyter/datascience-notebook:latest
-  container_name: jupyter
-  ports:
-    - 8888:8888
-  environment:
-    JUPYTER_ENABLE_LAB: "yes"
-    JUPYTER_TOKEN: "docker"
+version: '3.6'
+
+services:
+  jupyter:
+    image: jupyter/datascience-notebook:latest
+    container_name: jupyter
+    ports:
+      - 8888:8888
+    environment:
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "docker"
+```
+
+OR 
+
+```yaml
+version: '3.6'
+
+services:
+  jupyter:
+    image: jupyter/minimal-notebook
+    container_name: jupyter
+    volumes:
+      - ./jupyter:/home/jovyan/work
+      #- ./docker/jupyter/configure_environment.sh:/usr/local/bin/before-notebook.d/configure_environment.sh
+    ports:
+      - 8888:8888
+    environment:       
+      GRANT_SUDO: yes
+      NB_GID: 100
+      NB_USER: jovyan   
+      JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "docker"      
 ```
 
 ## Running from Docker CLI

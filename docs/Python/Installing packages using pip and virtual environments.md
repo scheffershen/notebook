@@ -33,7 +33,7 @@ To create a virtual environment, go to your project’s directory and run venv. 
 	$ python3 -m venv env # linux
 	OR
 	$ virtualenv env      # linux
-	$ py -m venv env      # windows
+	$ py -3.7 -m venv env      # windows
 
 The second argument is the location to create the virtual environment. Generally, you can just create this in your project and call it `env`.	
 

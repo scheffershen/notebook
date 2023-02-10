@@ -1,6 +1,19 @@
 Developpeur resources
 =====================
 
+## Top 10 AI Tools Like ChatGPT You Must Try in 2023
+
+00:07 - MidJourney AI Art
+01:24 - Adobe Podcast AI Voice
+02:18 - Nvidia Broadcast - AI Video Geforce
+03:10 - Codedamn  - With ChatGPT Support
+04:19 - Descript - AI Video
+05:12 - Notion AI - AI Text Generation
+06:26 - Synthesia - AI Avatar
+07:00 - Resemble AI - Voice AI
+07:39 - Soundraw AI - AI Music and Sound
+08:13 - Futurepedia - AI Tools Database
+
 ## Filechat.io
 
 Filechat is the perfect tool to explore documents using artificial intelligence. Simply upload your PDF and start asking questions to your personalized chatbot. Sign up for a free trial today, no credit card required.
