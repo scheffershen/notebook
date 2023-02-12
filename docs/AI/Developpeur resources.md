@@ -50,6 +50,18 @@ Your AI Copilot to decode any research paper
 - Book reader -  @elevenlabsio
 - Real time ChatGPT - @ChatSonicAI
 
+## 9 new red-hot AI tools you cannot miss:
+
+Chat GPT - Research
+Leiainc - Magical 3D
+Grahamai - Tweet Writer
+Fakeyou AI - Text to Speech
+Simplified - Content Creator
+Beautiful AI - Presentations
+StoryLab - Hooks, Outlines
+Designify - Automatic Designs
+Flowcv - Job Winning Resume
+
 ### Practice Sites for Developers
 
 ➤ SQL
