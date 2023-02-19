@@ -1,4 +1,4 @@
-ChatGPT Tutorials
+create app with ChatGPT Tutorials
 =================
 
 https://www.youtube.com/@ChatGPT-AI/videos
@@ -11,7 +11,7 @@ Steps:
 "random password generator" chrom extension. on click extension icon, open index.html. display a slider with min value=6 and max value=20. user can slide this slider to change it's value in the given range. on click "generate password" button, generate random password and display it. also add "copy" button, on click this button copy the generated password to clipboard. also write code for manifest.json file. use html, javascript and bootstrap.
 ```
 
-### Build ChatGPT Clone using Open AI API 
+### Build ChatGPT Clone using Open AI API
 
 Steps: 
 

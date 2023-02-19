@@ -12,6 +12,7 @@ Ai_RoadMap
 	- [openai-cookbook](https://github.com/openai/openai-cookbook)
 	- [Question And Answering System Using GPT3](https://www.pragnakalp.com/question-answering-using-gpt3-examples/)
 	- [playground](https://platform.openai.com/playground)
+	- awesome-chatgpt-prompts
 - OpenAI API
 	+ openai.Answer.create()
 	+ openai.Completion.create()
@@ -24,3 +25,10 @@ Ai_RoadMap
 			+ Davinci
 		- Embedding models
 			+ Ada
+- Question Answering
+	+ How to build an AI that can answer questions about your website
+	+ question-answering-using-gpt3-examples
+- Examples
+	+ create app with ChatGPT Tutorials
+	+ 6 個你可能不知道原來 ChatGPT 也能做到的事情
+	+ 10 astuces pour mieux communiquer avec l'IA
