@@ -1,8 +1,0 @@
-{
-    "label": "Deepset ai Haystack",
-    "position": 3,
-    "link": {
-      "type": "generated-index",
-      "description": "Deepset ai Haystack is a framework for building production-ready Question Answering systems. It is based on the Transformers library and provides a simple and intuitive API to build your own QA system. It is built on top of Elasticsearch and provides a simple REST API to query your system. It also provides a simple UI to explore your data and test your system.",
-    }
-  }

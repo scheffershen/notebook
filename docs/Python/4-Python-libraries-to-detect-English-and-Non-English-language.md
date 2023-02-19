@@ -8,14 +8,16 @@ We will discuss spacy-langdetect, Pycld2, TextBlob, and Googletrans for language
 You need to install the `spacy-langdetect` and `spacy` python libraries for the below code to work.
 
 ```python
->>> from spacy_langdetect import LanguageDetector
->>> import spacy
->>> nlp = spacy.load('en')  # 1
->>> nlp.add_pipe(LanguageDetector(), name='language_detector', last=True) #2
->>> text_content = "Er lebt mit seinen Eltern und seiner Schwester in Berlin."
->>> doc = nlp(text_content) #3
->>> detect_language = doc._.language #4
->>> print(detect_language)
+from spacy_langdetect import LanguageDetector
+
+import spacy
+
+nlp = spacy.load('en')  # 1
+nlp.add_pipe(LanguageDetector(), name='language_detector', last=True) #2
+text_content = "Er lebt mit seinen Eltern und seiner Schwester in Berlin."
+doc = nlp(text_content) #3
+detect_language = doc._.language #4
+print(detect_language)
 {'language': 'de', 'score': 0.9999958526911192}
 ```
 

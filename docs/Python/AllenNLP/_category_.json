@@ -1,8 +1,0 @@
-{
-    "label": "AllenNLP",
-    "position": 2,
-    "link": {
-      "type": "generated-index",
-      "description": "AllenNLP is a deep learning research library, built on PyTorch, for developing state-of-the-art deep learning models on a wide variety of linguistic tasks.",
-    }
-  }
