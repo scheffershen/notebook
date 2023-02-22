@@ -13,19 +13,14 @@ Dépendances :
 
 Désarchivage :
 
-    unzip ~/Téléchargements/Backup-Manager-master.zip
+    $ unzip ~/Téléchargements/Backup-Manager-master.zip
 
 Installation :
 
-    cd ~/Backup-Manager-master
-    sudo make install
+    $ cd ~/Backup-Manager-master
+    $ sudo make install
 
 Utilisation du fichier de configuration fourni :
 
-    sudo cp /usr/share/backup-manager/backup-manager.conf.tpl /etc/backup-manager.conf
-
-## Configuration
-
-## SUtilisation
-
+    $ sudo cp /usr/share/backup-manager/backup-manager.conf.tpl /etc/backup-manager.conf
 

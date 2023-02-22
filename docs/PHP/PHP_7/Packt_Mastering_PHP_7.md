@@ -263,11 +263,11 @@ http://www.packtpub.com
         + Jenkins 
     - Summary
 
-##Preface
+## Preface
 
 The latest  PHP 7.1 release brings  forth   enormous    amount  of  improvements,   both    from    the language    syntax and  overall performance perspective.    There   has never   been    a   better  time    to  dig into    a   PHP than    now
 
-##1. The All New PHP 
+## 1. The All New PHP 
 
 In this chapter, we will take a detailed look into some of the new features    introduced in PHP 7 and 7.1 releases:
 

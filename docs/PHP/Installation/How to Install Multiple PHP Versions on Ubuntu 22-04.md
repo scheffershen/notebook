@@ -40,7 +40,6 @@ uninstall all the modules for that version,
 	$ sudo apt-get remove php5.6-*
 
 
-
 Comment installer PHP 7.2 sur Ubuntu 20.04 / Ubuntu 18.04 / Ubuntu 16.04
 ====================================
 

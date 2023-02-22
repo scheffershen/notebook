@@ -1,3 +1,7 @@
+purge otsuka bash
+==============
+
+```bash
 #! /bin/bash
 #
 ######################################################################################
@@ -11,4 +15,4 @@ echo $purge_date
 purge=`rm /var/archives/otsuka2-"$purge_date"*`
 
 exit 0
-
+```

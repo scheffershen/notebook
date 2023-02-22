@@ -1,3 +1,7 @@
+purge bms bash
+==============
+
+```bash
 #! /usr/bin/env bash
 
 ##exemple purge for bms 
@@ -13,3 +17,4 @@ echo $purge_date
 purge=`rm -rf /home/backup/"$purge_date"*`
 
 exit 0
+```

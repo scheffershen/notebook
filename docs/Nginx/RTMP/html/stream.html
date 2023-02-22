@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Your Stream</title>
+  <!--
+  FROM   https://www.youtube.com/watch?v=dwhFIfdjK8A
+  selimatmaca.com/index.php/live-streaming
+  Uses the latest versions of video.js and videojs-http-streaming.
+
+  To use specific versions, please change the URLs to the form:
+
+  <link href="https://unpkg.com/video.js@6.7.1/dist/video-js.css" rel="stylesheet">
+  <script src="https://unpkg.com/video.js@6.7.1/dist/video.js"></script>
+  <script src="https://unpkg.com/@videojs/http-streaming@0.9.0/dist/videojs-http-streaming.js"></script>
+
+  -->
+  <link href="http://yourserver.ddns.net:8088/video.js/video-js.css" rel="stylesheet">
+</head>
+<body>
+<center>
+  <video-js id="live_stream" class="vjs-default-skin" controls autoplay preload="auto" width="1280" height="720">
+    <source src="http://yourserver.ddns.net:8088/live/stream/index.m3u8" type="application/x-mpegURL">
+  </video-js>
+  
+  <script src='http://yourserver.ddns.net:8088/video.js/video.js'></script>
+  <script src="http://yourserver.ddns.net:8088/video.js/videojs-http-streaming.js"></script>
+  
+  <script>
+    var player = videojs('live_stream');
+  </script>
+ </center>
+</body>
+</html>
