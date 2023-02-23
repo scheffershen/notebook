@@ -1,6 +1,6 @@
 {
     "label": "xApi",
-    "position": 47,
+    "position": 55,
     "link": {
       "type": "generated-index",
       "description": "xApi is the new standard for learning record stores. It is a RESTful API that allows you to store and retrieve learning records. xApi is a standard that is being developed by the Advanced Distributed Learning Initiative (ADL)."

@@ -5,11 +5,11 @@ authors: [yshen]
 tags: [Ubuntu, PHP, MySQL]
 ---
 
-### Etape 1. Suavegarder des bases des données MySQL et les données client (/var/www/client.medica-source.com/app/data)
+#### Etape 1. Suavegarder des bases des données MySQL et les données client (/var/www/client.medica-source.com/app/data)
 	
 	$ mysqldump -u -root -p ms_mutualise > ms_mutualise.sql
 	
-### Etape 2. Mettre à niveau Ubuntu 18.04 vers 20.04 LTS
+#### Etape 2. Mettre à niveau Ubuntu 18.04 vers 20.04 LTS
 	
 	$ do-release-upgrade
 
@@ -23,7 +23,7 @@ PHP 7.4, MySQL 8 sont par défaut sous Ubuntu 20.04
     $ mv vendor_php74 vendor
     $ rm var/cache/prod -r
 
-### Etape 3. Mettre à niveau Ubuntu 20.04 vers 22.04 LTS
+#### Etape 3. Mettre à niveau Ubuntu 20.04 vers 22.04 LTS
 
     $ sudo apt list --upgradable
     $ sudo apt update && sudo apt upgrade -y
@@ -32,7 +32,7 @@ PHP 7.4, MySQL 8 sont par défaut sous Ubuntu 20.04
     $ do-release-upgrade 
     $ lsb_release -a
 
-### Etape 4. Réinstaller PHP 7.4 sur Ubuntu 22.04 LTS
+#### Etape 4. Réinstaller PHP 7.4 sur Ubuntu 22.04 LTS
 
 	$ sudo apt update && sudo apt upgrade
     $ sudo apt install software-properties-common
@@ -44,3 +44,15 @@ PHP 7.4, MySQL 8 sont par défaut sous Ubuntu 20.04
     $ sudo apt install libapache2-mod-php7.4
     $ sudo a2enmod php7.4
     $ service apache2 restart
+
+#### Attenstions
+
+- PHP 7.4 est plus strict sur array, nul ou vide n’a pas être convertir à array
+- Pour convertir SVG à PNG par Imagick, il faut installer inkscape  
+
+    $ dpkg -l | grep inkscape
+	$ which inkscape
+
+	$ apt install inkscape
+	$ sudo add-apt-repository ppa:inkscape.dev/stable
+	$ sudo apt update
