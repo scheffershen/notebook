@@ -1,6 +1,8 @@
 10 astuces pour mieux communiquer avec l'IA
 ===========================================
 
+2023-01
+
 Nous allons maintenant apprendre à *optimiser nos recherches* afin de tomber sur des résultats plus adaptés à notre demande. Il est en effet tout à fait possible de lui parler comme l'on parle à un humain avec un : "peux-tu reformuler ta réponse ?", mais il faut parfois adopter certaines tournures de phrase. 
 
 ## 1. Donner un contexte

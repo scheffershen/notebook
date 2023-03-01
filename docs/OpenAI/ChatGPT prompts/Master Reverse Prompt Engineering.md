@@ -1,6 +1,8 @@
 Master Reverse Prompt Engineering
 =================================
 
+2023-01
+
 #### Example:
 
 => Reverse engineer the following {code} in to a prompt:

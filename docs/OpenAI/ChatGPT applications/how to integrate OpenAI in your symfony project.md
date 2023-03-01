@@ -1,6 +1,8 @@
 how to integrate OpenAI in your symfony project
 ================================================
 
+2023-01
+
 Integrating OpenAI into a Symfony project involves a few steps:
 
 1. Install the OpenAI API client library: You can use Composer, Symfony's package manager, to install the OpenAI API client library. Open a terminal window, navigate to your Symfony project directory and run the following command:

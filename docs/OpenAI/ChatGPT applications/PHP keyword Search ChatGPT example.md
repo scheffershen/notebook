@@ -1,6 +1,8 @@
 PHP keyword Search ChatGPT example
 ==================================
 
+2023-01
+
 ## step 1
 
 You are a PHP developer and now you are creating a web application that can search keywords like Google, for example, when the user enters a keyword "levonorgestrel ethinyl estradiol", the application might find "LEVONORGESTREL/ETHINYLESTRADIOL" , “LEVONORGESTREL/ETHINYLESTRADIOL”, “ethinylestradiol/ levonorgestrel”, “Levonorgestrel Ethinylestradiol” and count the number of keywords in the text, and highlight it, and finally you write unit tests with PHPUnit to test that it works

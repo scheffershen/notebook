@@ -1,6 +1,8 @@
 question-answering-using-gpt3-examples
 ======================================
 
+2023-01
+
 - https://www.pragnakalp.com/question-answering-using-gpt3-examples/
 - https://www.pinecone.io/learn/openai-gen-qa/
 

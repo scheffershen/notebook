@@ -1,6 +1,8 @@
 how to use OpenAI api in a python flask api server with your faqs
 ================================================================
 
+2023-01
+
 as a python flask developer how to build your question and answer api using openai api based on your own data
 
 ```python

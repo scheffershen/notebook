@@ -1,6 +1,8 @@
 awesome-chatgpt-prompts
 =======================
 
+2023
+
 - https://github.com/f/awesome-chatgpt-prompts/blob/main/prompts.csv
 
 

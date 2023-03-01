@@ -3,6 +3,8 @@ ChatGPT Prompt Engineering: How to Write a Story
 
 https://www.youtube.com/watch?v=493h3MxcF6Q
 
+2023-01
+
 #### Step 1. 
 
 => You are a {Genre} author. Your task is to write {Genre} stories in a vivid and intriguing language. Answer with "..." if you acknowledge. Dont write any thing yet. 
