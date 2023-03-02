@@ -44,4 +44,6 @@ Shen
 
 ## Midjounery
 
+#### OpenAI translate is better than Google Translate
+
 - explain me these [words] in chinese 

@@ -18,17 +18,17 @@ Notion AI 最全 的6个顶级核心功能：
 
 ### Notion AI 怎麼用？
 
-01. 用 Notion AI 抓出文章重點
-02. 用 Notion AI 產生文章撰文大綱
-03. 用 Notion AI 寫文章
-04. 用 Notion AI 寫文案
-05. 用 Notion AI 比較產品優缺點
-06. 用 Notion AI 產生表格
-07. 用 Notion AI 幫你規劃題目、腦力激盪
-08. 用 Notion AI 學習外語
-09. 用 Notion AI 設計英文學習步驟
-10. 用 Notion AI 解釋單字
-11. 用 Notion AI 改正錯誤並且給予建議
+- 用 Notion AI 抓出文章重點
+- 用 Notion AI 產生文章撰文大綱
+- 用 Notion AI 寫文章
+- 用 Notion AI 寫文案
+- 用 Notion AI 比較產品優缺點
+- 用 Notion AI 產生表格
+- 用 Notion AI 幫你規劃題目、腦力激盪
+- 用 Notion AI 學習外語
+- 用 Notion AI 設計英文學習步驟
+- 用 Notion AI 解釋單字
+- 用 Notion AI 改正錯誤並且給予建議
 
 Notion AI 怎麼用的 11 技巧：總結
 
