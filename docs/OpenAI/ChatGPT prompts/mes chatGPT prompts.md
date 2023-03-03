@@ -47,3 +47,7 @@ Shen
 #### OpenAI translate is better than Google Translate
 
 - explain me these [words] in chinese 
+
+#### SVN
+
+- As a  Subversion, SVN (version control system) expert, Could you explain me this {error message} and how i will handle it
