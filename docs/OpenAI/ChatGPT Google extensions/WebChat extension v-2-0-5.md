@@ -47,7 +47,7 @@ Il convient de noter que la limite quotidienne pour régler avec la carte Swile 
 
 - https://github.com/wong2/chatgpt-google-extension
 - https://github.com/gragland/chatgpt-chrome-extension
-- https://github.com/qunash/chatgpt-advanced
+- https://github.com/qunash/chatgpt-advanced (WebChatGPT: A browser extension that augments your ChatGPT prompts with web results.)
 - https://github.com/idosal/assistant-chat-gpt
 
 #### GitHub + ChatGPT

@@ -14,23 +14,7 @@ version: '3.6'
 
 services:
   jupyter:
-    image: jupyter/datascience-notebook:latest
-    container_name: jupyter
-    ports:
-      - 8888:8888
-    environment:
-      JUPYTER_ENABLE_LAB: "yes"
-      JUPYTER_TOKEN: "docker"
-```
-
-OR 
-
-```yaml
-version: '3.6'
-
-services:
-  jupyter:
-    image: jupyter/minimal-notebook
+    image: jupyter/datascience-notebook #minimal-notebook
     container_name: jupyter
     volumes:
       - ./jupyter:/home/jovyan/work
@@ -40,9 +24,10 @@ services:
     environment:       
       GRANT_SUDO: yes
       NB_GID: 100
-      NB_USER: jovyan   
+      NB_USER: jovyan  
+      PASSWORD: jovyan 
       JUPYTER_ENABLE_LAB: "yes"
-      JUPYTER_TOKEN: "docker"      
+      JUPYTER_TOKEN: "docker"     
 ```
 
 ## Running from Docker CLI
