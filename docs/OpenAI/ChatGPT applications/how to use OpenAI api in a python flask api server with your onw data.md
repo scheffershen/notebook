@@ -47,7 +47,7 @@ def get_answer():
 
 Certainly! Here's an example `docker-compose.yml` file that you can use to run a Python Flask API service in a Docker container:
 
-```
+```yaml
 version: '3'
 services:
   web:

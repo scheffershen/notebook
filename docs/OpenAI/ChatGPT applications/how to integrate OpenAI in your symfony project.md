@@ -11,13 +11,13 @@ Integrating OpenAI into a Symfony project involves a few steps:
 
 2. Configure the API key: You'll need an API key from OpenAI to access the API. If you don't have one, sign up for an account and create an API key. Then, add the API key to your Symfony project's environment variables.
 
-```
+```env
 OPENAI_API_KEY=your-api-key-here
 ```
 
 3. Create a service for the OpenAI API client: To make API calls, you'll need to create a service for the OpenAI API client. Open your Symfony project's `services.yaml` file and add the following:
 
-```
+```yaml
 services:
    openai.client:
        class: OpenAI\Api\Client
@@ -27,7 +27,7 @@ services:
 
 4. Use the OpenAI API client: You can now use the OpenAI API client in your Symfony project's code. For example, to use the GPT-3 API to generate text, you can call the `completions` method of the client, like this:
 
-```
+```php
 use OpenAI\Api\Client;
 
 $client = $container->get(Client::class);

@@ -108,35 +108,19 @@ date 09/03/2023
 		- Bombacore, Thriftcore
 		- Dollpunk
 	+ 🎭⛄ Seasons and Weather
-		- Seasons	
-		- Spring	
-		- Summer
-		- Autumn	
-		- Winter
-		- Weather	
-		- Weathercore	
-		- Overcast
-		- Breeze	
-		- Wind
-		- Rain	
-		- Downpour
-		- Sleet	
-		- Snow	
-		- Hail
-		- Lightning	
-		- Lightning Bolt
-		- Hurricane	
-		- Tornado	
-		- Microburst
-		- Storm	
-		- Stormy
+		- Seasons, Spring, Summer
+		- Autumn, Winter
+		- Weather, Weathercore, Overcast
+		- Breeze, Wind
+		- Rain, Downpour
+		- Sleet, Snow, Hail
+		- Lightning, Lightning Bolt
+		- Lightningwave, Thunderbolt
+		- Hurricane, Tornado, Microburst
+		- Storm, Stormy
 		- Sandstorm
-		- Heat	
-		- Heatwave	
-		- Eruption
-		- Tsunami	
-		- Flood	
-		- Flooded
+		- Heat, Heatwave, Eruption
+		- Tsunami, Flood, Flooded
 		- Frozen-in-Time Photograph
 	+ 🎭🌞 Time of Day
 	+ 🎭🎵 Music Styles
