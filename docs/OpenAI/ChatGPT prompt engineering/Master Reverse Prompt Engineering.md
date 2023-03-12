@@ -9,7 +9,6 @@ Master Reverse Prompt Engineering
 
 code = 
 
-
 #### Step 1:
 
 => Can we talk about Reverse Prompt Engineering? By Reverse Prompt Engineering, I mean creating a prompt from a given text.

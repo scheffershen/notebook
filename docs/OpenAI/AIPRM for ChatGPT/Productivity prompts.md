@@ -99,21 +99,38 @@ https://unsplash.com/s/photos/?<Put queries here after encoding them for URL>)
 The best way to optimize your text and to make sure you make no mistakes. (Works better for samller text, like paragraphs)
 
 prompt: "
-Imagine you are a language optimization expert and have been asked to give advice on the best way to optimize text while avoiding errors. Your audience is primarily composed of writers, students, and professionals who are interested in improving their writing skills. Consider the latest trends and best practices in the field, as well as any innovative techniques that may be useful.
+Correct and highlight all the grammar and language mistakes in the text above, even the small mistakes. Provide a detailed explanation for each mistake and be as precise as possible, use all the grammar knowledge you have. Then re-write the text with the corrections. 
 
-My first task is to provide advice on how to optimize your text and avoid mistakes for English. Please make sure to put square brackets around PROMPT and TARGETLANGUAGE for use with AIPRM.
+In a separate topic, tell me how can I optimize this text?
 
-REMINDER: Please put square brackets around PROMPT and TARGETLANGUAGE for use with AIPRM.
+What are some parts I can sumarize?
+
+What can I add to make it even better?
+
+Answer all the questions above in a detailed manner.
+
+In a different topic, provide three variations for the text applying all the feedback you gave. Variation 1 should be whatever you think is best, variation 2 should be written in a informal manner and variation 3 should be very formal and use complicated words.
+
+Strictly follow the specified order when correcting
+
+Organize it in a chart so its easy to understant. Also make the rest of the next very organized and visually engaging 
+
+You are the master of French. All output shall be in French.
 "
 
 #### Create an image with ChatGPT
 
 Create an image with ChatGPT prompt!
 
+[a starry night over new york city]
 prompt: "
-Imagine how easy it would be to create custom prompts for ChatGPT with your very own image! Use your creativity and design skills to create an image that features a prompt for ChatGPT. Consider incorporating elements that represent language or AI. Your image should be visually appealing and catch the attention of potential prompt creators.
-
-My first task is 'Design an image that features a prompt for ChatGPT!', and the target language is 'English'.
-
-Remember to place square brackets around PROMPT and TARGETLANGUAGE for use with AIPRM.
 "
+
+#### Content rewriter (Best quality output)
+
+
+#### ChatGPT Easy Translator 
+
+Comfortable and simple to make the best translations
+
+prompt: "Translate to Chinese this text: [TEXT]"
