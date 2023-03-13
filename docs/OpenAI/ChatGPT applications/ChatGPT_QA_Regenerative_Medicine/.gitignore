@@ -1,0 +1,8 @@
+papers_pdf/
+papers_txt/
+papers_json/
+
+venv/
+
+key_openai.txt
+key_pinecone.txt
